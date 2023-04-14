@@ -59,5 +59,8 @@
       "eslint --fix",
       "git add -A ."
     ]
+  },
+  "dependencies": {
+    "ofetch": "^1.0.1"
   }
 }
