@@ -8,6 +8,7 @@ import { resolve } from 'path'
 export default defineConfig({
   test: {
     watch: false,
+    setupFiles: ['./tests/setup.ts'],
     passWithNoTests: true
   },
   plugins: [
