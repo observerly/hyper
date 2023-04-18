@@ -33,5 +33,14 @@ suite('@observerly/hyper Fiber API Telescope Client', () => {
       const { tracking } = await client.telescope.isTracking()
       expect(tracking).toBe(false)
     })
+
+    it('should be able to determine the configuration of the telescope', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const config = await client.telescope.getConfiguration()
+      const { apertureArea, apertureDiameter, focalLength } = config
+      expect(apertureArea).toBe(0.0269)
+      expect(apertureDiameter).toBe(0.0269)
+      expect(focalLength).toBe(1.26)
+    })
   })
 })

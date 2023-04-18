@@ -48,6 +48,19 @@ export const telescope = (
         const url = new URL('telescope/tracking', base)
         return dispatchRequest<T>(url, init, headers)
       }
+    },
+    {
+      name: 'getConfiguration',
+      action: <
+        T = {
+          apertureArea: number
+          apertureDiameter: number
+          focalLength: number
+        }
+      >() => {
+        const url = new URL('telescope/config', base)
+        return dispatchRequest<T>(url, init, headers)
+      }
     }
   ] as const
 

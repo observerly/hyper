@@ -39,6 +39,17 @@ export const telescopeHandlers: Handler[] = [
         tracking: false
       }
     })
+  },
+  {
+    method: 'GET',
+    url: '/api/v1/telescope/config',
+    handler: eventHandler(_event => {
+      return {
+        apertureArea: 0.0269,
+        apertureDiameter: 0.0269,
+        focalLength: 1.26
+      }
+    })
   }
 ]
 
