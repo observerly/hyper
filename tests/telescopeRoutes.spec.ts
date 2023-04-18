@@ -27,5 +27,11 @@ suite('@observerly/hyper Fiber API Telescope Client', () => {
       const { slewing } = await client.telescope.isSlewing()
       expect(slewing).toBe(false)
     })
+
+    it('should be able to determine the tracking status of the telescope', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const { tracking } = await client.telescope.isTracking()
+      expect(tracking).toBe(false)
+    })
   })
 })

@@ -30,6 +30,15 @@ export const telescopeHandlers: Handler[] = [
         slewing: false
       }
     })
+  },
+  {
+    method: 'GET',
+    url: '/api/v1/telescope/tracking',
+    handler: eventHandler(_event => {
+      return {
+        tracking: false
+      }
+    })
   }
 ]
 
