@@ -21,6 +21,15 @@ export const telescopeHandlers: Handler[] = [
         connected: true
       }
     })
+  },
+  {
+    method: 'GET',
+    url: '/api/v1/telescope/slewing',
+    handler: eventHandler(_event => {
+      return {
+        slewing: false
+      }
+    })
   }
 ]
 

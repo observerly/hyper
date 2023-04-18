@@ -21,5 +21,11 @@ suite('@observerly/hyper Fiber API Telescope Client', () => {
       const { connected } = await client.telescope.isConnected()
       expect(connected).toBe(true)
     })
+
+    it('should be able to determine the slewing status of the telescope', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const { slewing } = await client.telescope.isSlewing()
+      expect(slewing).toBe(false)
+    })
   })
 })
