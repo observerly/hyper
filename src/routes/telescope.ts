@@ -61,6 +61,17 @@ export const telescope = (
         const url = new URL('telescope/config', base)
         return dispatchRequest<T>(url, init, headers)
       }
+    },
+    {
+      name: 'initialise',
+      action: <
+        T = {
+          connected: boolean
+        }
+      >() => {
+        const url = new URL('telescope/init', base)
+        return dispatchRequest<T>(url, { ...init, method: 'PUT' }, headers)
+      }
     }
   ] as const
 
