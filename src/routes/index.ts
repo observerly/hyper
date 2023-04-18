@@ -6,14 +6,16 @@
 
 /*****************************************************************************************************************/
 
-import { baseHandlers } from './base'
-
-import { telescopeHandlers } from './telescope'
-
-import { type Handler } from '../shared/handler'
+import { telescope } from './telescope'
 
 /*****************************************************************************************************************/
 
-export const handlers: Handler[] = [...baseHandlers, ...telescopeHandlers]
+export const routes = (
+  base: URL = new URL('http://localhost:3000/api/v1'),
+  init?: RequestInit,
+  headers?: () => Headers | Promise<Headers>
+) => ({
+  telescope: telescope(base, init, headers)
+})
 
 /*****************************************************************************************************************/

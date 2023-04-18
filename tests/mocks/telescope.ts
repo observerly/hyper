@@ -6,14 +6,22 @@
 
 /*****************************************************************************************************************/
 
-import { baseHandlers } from './base'
-
-import { telescopeHandlers } from './telescope'
+import { eventHandler } from 'h3'
 
 import { type Handler } from '../shared/handler'
 
 /*****************************************************************************************************************/
 
-export const handlers: Handler[] = [...baseHandlers, ...telescopeHandlers]
+export const telescopeHandlers: Handler[] = [
+  {
+    method: 'GET',
+    url: '/api/v1/telescope/connected',
+    handler: eventHandler(_event => {
+      return {
+        connected: true
+      }
+    })
+  }
+]
 
 /*****************************************************************************************************************/

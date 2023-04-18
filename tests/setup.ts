@@ -52,7 +52,9 @@ export const setupClient = (url: string) => {
 
 // Establish API mocking before all tests.
 beforeAll(async () => {
-  listener = await listen(toNodeListener(server))
+  listener = await listen(toNodeListener(server), {
+    port: 3033
+  })
 })
 
 /*****************************************************************************************************************/

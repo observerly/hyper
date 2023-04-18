@@ -6,14 +6,27 @@
 
 /*****************************************************************************************************************/
 
-import { baseHandlers } from './base'
-
-import { telescopeHandlers } from './telescope'
-
-import { type Handler } from '../shared/handler'
+import { dispatchRequest } from '../internals/dispatchRequest'
 
 /*****************************************************************************************************************/
 
-export const handlers: Handler[] = [...baseHandlers, ...telescopeHandlers]
+export const telescope = (
+  base: URL,
+  init?: RequestInit,
+  headers?: () => Promise<Headers> | Headers
+) =>
+  [
+    {
+      name: 'isConnected',
+      action: <
+        T = {
+          connected: boolean
+        }
+      >() => {
+        const url = new URL('telescope/connected', base)
+        return dispatchRequest<T>(url, init, headers)
+      }
+    }
+  ] as const
 
 /*****************************************************************************************************************/
