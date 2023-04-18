@@ -6,7 +6,7 @@
 
 /*****************************************************************************************************************/
 
-import { eventHandler } from 'h3'
+import { eventHandler, getMethod } from 'h3'
 
 import { type Handler } from '../shared/handler'
 
@@ -48,6 +48,24 @@ export const telescopeHandlers: Handler[] = [
         apertureArea: 0.0269,
         apertureDiameter: 0.0269,
         focalLength: 1.26
+      }
+    })
+  },
+  {
+    method: 'PUT',
+    url: '/api/v1/telescope/init',
+    handler: eventHandler(event => {
+      const method = getMethod(event)
+
+      if (method !== 'PUT') {
+        return new Response('Method Not Allowed', {
+          status: 405,
+          statusText: 'Method Not Allowed'
+        })
+      }
+
+      return {
+        connected: true
       }
     })
   }
