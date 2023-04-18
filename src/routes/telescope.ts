@@ -26,6 +26,17 @@ export const telescope = (
         const url = new URL('telescope/connected', base)
         return dispatchRequest<T>(url, init, headers)
       }
+    },
+    {
+      name: 'isSlewing',
+      action: <
+        T = {
+          slewing: boolean
+        }
+      >() => {
+        const url = new URL('telescope/slewing', base)
+        return dispatchRequest<T>(url, init, headers)
+      }
     }
   ] as const
 
