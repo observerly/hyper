@@ -41,14 +41,6 @@ beforeAll(async () => {
 
 /*****************************************************************************************************************/
 
-// Reset any request handlers that we may add during the tests,
-// so they don't affect other tests.
-afterEach(async () => {
-  await listener.close()
-})
-
-/*****************************************************************************************************************/
-
 // Clean up after the tests are finished.
 afterAll(async () => {
   await listener.close()
