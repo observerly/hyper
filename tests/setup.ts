@@ -6,7 +6,7 @@
 
 /*****************************************************************************************************************/
 
-import { beforeAll, afterEach, afterAll } from 'vitest'
+import { beforeAll, afterAll } from 'vitest'
 
 import { type Listener, listen } from 'listhen'
 
@@ -18,9 +18,16 @@ import { ofetch } from 'ofetch'
 
 import { server } from './utilities/server'
 
+import { createHyperClient, routes } from '../src/index'
+
 /*****************************************************************************************************************/
 
 export const fetch = ofetch.create({ baseURL: 'http://localhost:3000/', responseType: 'json' })
+
+/*****************************************************************************************************************/
+
+// Provide a listener to ensure that the server is running.
+let listener: Listener
 
 /*****************************************************************************************************************/
 
@@ -29,8 +36,17 @@ export const getURL = (url: string) => joinURL(listener.url, url)
 
 /*****************************************************************************************************************/
 
-// Provide a listener to ensure that the server is running.
-let listener: Listener
+// Setup a client for testing.
+export const setupClient = (url: string) => {
+  return createHyperClient(routes, {
+    base: new URL(url),
+    headers: async () => {
+      return new Headers({
+        'X-API-Key': `Key <<API_KEY>>`
+      })
+    }
+  })
+}
 
 /*****************************************************************************************************************/
 
