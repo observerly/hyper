@@ -28,7 +28,8 @@ import { fetchHandler } from './fetchHandler'
 export const dispatchRequest = async <T>(
   url: URL,
   init?: RequestInit,
-  headers?: () => Promise<Headers> | Headers
+  headers?: () => Promise<Headers> | Headers,
+  body?: string
 ) => {
   const req = new Request(url, init)
 
@@ -41,7 +42,7 @@ export const dispatchRequest = async <T>(
     })
   }
 
-  return await fetchHandler<T>(req)
+  return await fetchHandler<T>(req, body)
 }
 
 /*****************************************************************************************************************/
