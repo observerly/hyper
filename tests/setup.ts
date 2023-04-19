@@ -52,8 +52,10 @@ export const setupClient = (url: string) => {
 
 // Establish API mocking before all tests.
 beforeAll(async () => {
+  if (listener) return
+
   listener = await listen(toNodeListener(server), {
-    port: 3033
+    port: 3036
   })
 })
 
@@ -61,6 +63,8 @@ beforeAll(async () => {
 
 // Clean up after the tests are finished.
 afterAll(async () => {
+  if (!listener) return
+
   await listener.close()
 })
 
