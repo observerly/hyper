@@ -6,7 +6,7 @@
 
 /*****************************************************************************************************************/
 
-import { $fetch } from 'ofetch'
+import { $fetch, type FetchOptions } from 'ofetch'
 
 /*****************************************************************************************************************/
 
@@ -23,14 +23,20 @@ import { $fetch } from 'ofetch'
  * @returns - promise of unwrapped Response of generic data type <T>
  *
  */
-export const fetchHandler = <T>(req: Request) => {
-  const { url, method, headers, body } = req
+export const fetchHandler = <T>(req: Request, data?: string) => {
+  const { url, method, headers } = req
 
-  const options = {
+  let options = {
     method,
     headers,
-    body,
     credentials: 'include' as RequestCredentials
+  } as FetchOptions<'json'>
+
+  if (['POST', 'PUT', 'PATCH'].includes(method) && data) {
+    options = {
+      ...options,
+      body: JSON.parse(data)
+    }
   }
 
   return $fetch<T>(url, options)
