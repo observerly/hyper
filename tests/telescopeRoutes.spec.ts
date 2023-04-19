@@ -49,6 +49,12 @@ suite('@observerly/hyper Fiber API Telescope Client', () => {
       expect(connected).toBe(true)
     })
 
+    it('should be able to connect to the telescope', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const { connected } = await client.telescope.connect()
+      expect(connected).toBe(true)
+    })
+
     it('should be able to set the equatorial coordinates of the telescope', async () => {
       const client = setupClient(getURL('/api/v1/'))
       const { slewing } = await client.telescope.slewToEquatorialCoordinate({
