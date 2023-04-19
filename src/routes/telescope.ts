@@ -74,6 +74,29 @@ export const telescope = (
       }
     },
     {
+      name: 'connect',
+      action: <
+        T = {
+          connected: boolean
+        }
+      >() => {
+        const url = new URL('telescope/connect', base)
+
+        const data = JSON.stringify({ connect: true })
+
+        return dispatchRequest<T>(
+          url,
+          {
+            ...init,
+            method: 'PUT',
+            body: JSON.stringify({ connect: true })
+          },
+          headers,
+          data
+        )
+      }
+    },
+    {
       name: 'slewToEquatorialCoordinate',
       action: <
         T = {
