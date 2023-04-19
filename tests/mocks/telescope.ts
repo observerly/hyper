@@ -6,7 +6,7 @@
 
 /*****************************************************************************************************************/
 
-import { eventHandler, getMethod } from 'h3'
+import { eventHandler, getMethod, readBody } from 'h3'
 
 import { type Handler } from '../shared/handler'
 
@@ -66,6 +66,47 @@ export const telescopeHandlers: Handler[] = [
 
       return {
         connected: true
+      }
+    })
+  },
+  {
+    method: 'PUT',
+    url: '/api/v1/telescope/slew',
+    handler: eventHandler(async event => {
+      const method = getMethod(event)
+
+      if (method !== 'PUT') {
+        return new Response('Method Not Allowed', {
+          status: 405,
+          statusText: 'Method Not Allowed'
+        })
+      }
+
+      const body = await readBody<{ ra: number; dec: number }>(event)
+
+      if (!body) {
+        return new Response('Bad Request', {
+          status: 400,
+          statusText: 'Bad Request'
+        })
+      }
+
+      if (body.ra > 360 || body.ra < 0) {
+        return new Response('Bad Request', {
+          status: 400,
+          statusText: 'Bad Request'
+        })
+      }
+
+      if (body.dec > 90 || body.dec < -90) {
+        return new Response('Bad Request', {
+          status: 400,
+          statusText: 'Bad Request'
+        })
+      }
+
+      return {
+        slewing: true
       }
     })
   }
