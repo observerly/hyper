@@ -72,6 +72,28 @@ export const telescope = (
         const url = new URL('telescope/init', base)
         return dispatchRequest<T>(url, { ...init, method: 'PUT' }, headers)
       }
+    },
+    {
+      name: 'slewToEquatorialCoordinate',
+      action: <
+        T = {
+          slewing: true
+        }
+      >(body: {
+        ra: number
+        dec: number
+      }) => {
+        const url = new URL('telescope/slew', base)
+
+        const data = JSON.stringify(body)
+
+        return dispatchRequest<T>(
+          url,
+          { ...init, method: 'PUT', body: JSON.stringify(body) },
+          headers,
+          data
+        )
+      }
     }
   ] as const
 
