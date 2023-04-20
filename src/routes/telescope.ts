@@ -140,6 +140,28 @@ export const telescope = (
           data
         )
       }
+    },
+    {
+      name: 'slewToHorizontalCoordinate',
+      action: <
+        T = {
+          slewing: true
+        }
+      >(body: {
+        az: number
+        alt: number
+      }) => {
+        const url = new URL('telescope/slew/horizontal', base)
+
+        const data = JSON.stringify(body)
+
+        return dispatchRequest<T>(
+          url,
+          { ...init, method: 'PUT', body: JSON.stringify(body) },
+          headers,
+          data
+        )
+      }
     }
   ] as const
 

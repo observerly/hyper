@@ -136,6 +136,47 @@ export const telescopeHandlers: Handler[] = [
         slewing: true
       }
     })
+  },
+  {
+    method: 'PUT',
+    url: '/api/v1/telescope/slew/horizontal',
+    handler: eventHandler(async event => {
+      const method = getMethod(event)
+
+      if (method !== 'PUT') {
+        return new Response('Method Not Allowed', {
+          status: 405,
+          statusText: 'Method Not Allowed'
+        })
+      }
+
+      const body = await readBody<{ az: number; alt: number }>(event)
+
+      if (!body) {
+        return new Response('Bad Request', {
+          status: 400,
+          statusText: 'Bad Request'
+        })
+      }
+
+      if (body.az > 360 || body.az < 0) {
+        return new Response('Bad Request', {
+          status: 400,
+          statusText: 'Bad Request'
+        })
+      }
+
+      if (body.alt > 90 || body.alt < -90) {
+        return new Response('Bad Request', {
+          status: 400,
+          statusText: 'Bad Request'
+        })
+      }
+
+      return {
+        slewing: true
+      }
+    })
   }
 ]
 
