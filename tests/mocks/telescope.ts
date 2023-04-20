@@ -98,7 +98,7 @@ export const telescopeHandlers: Handler[] = [
   },
   {
     method: 'PUT',
-    url: '/api/v1/telescope/slew',
+    url: '/api/v1/telescope/slew/equatorial',
     handler: eventHandler(async event => {
       const method = getMethod(event)
 
