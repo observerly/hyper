@@ -129,7 +129,7 @@ export const telescope = (
         ra: number
         dec: number
       }) => {
-        const url = new URL('telescope/slew', base)
+        const url = new URL('telescope/slew/equatorial', base)
 
         const data = JSON.stringify(body)
 
