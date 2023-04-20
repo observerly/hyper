@@ -6,18 +6,24 @@
 
 /*****************************************************************************************************************/
 
-import { rotator } from './rotator'
-import { telescope } from './telescope'
+import { dispatchRequest } from '../internals/dispatchRequest'
 
 /*****************************************************************************************************************/
 
-export const routes = (
-  base: URL = new URL('http://localhost:3000/api/v1'),
+export const rotator = (
+  base: URL,
   init?: RequestInit,
-  headers?: () => Headers | Promise<Headers>
-) => ({
-  rotator: rotator(base, init, headers),
-  telescope: telescope(base, init, headers)
-})
-
-/*****************************************************************************************************************/
+  headers?: () => Promise<Headers> | Headers
+) => [
+  {
+    name: 'isConnected',
+    action: <
+      T = {
+        connected: boolean
+      }
+    >() => {
+      const url = new URL('rotator/connected', base)
+      return dispatchRequest<T>(url, init, headers)
+    }
+  }
+]
