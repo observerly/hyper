@@ -69,5 +69,14 @@ suite('@observerly/hyper Fiber API Telescope Client', () => {
       })
       expect(slewing).toBe(true)
     })
+
+    it('should be able to set the horizontal coordinates of the telescope', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const { slewing } = await client.telescope.slewToHorizontalCoordinate({
+        az: 23.012001,
+        alt: 33.511206
+      })
+      expect(slewing).toBe(true)
+    })
   })
 })
