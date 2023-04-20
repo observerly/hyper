@@ -6,18 +6,20 @@
 
 /*****************************************************************************************************************/
 
-import { rotator } from './rotator'
-import { telescope } from './telescope'
+import { describe, expect, it, suite } from 'vitest'
 
 /*****************************************************************************************************************/
 
-export const routes = (
-  base: URL = new URL('http://localhost:3000/api/v1'),
-  init?: RequestInit,
-  headers?: () => Headers | Promise<Headers>
-) => ({
-  rotator: rotator(base, init, headers),
-  telescope: telescope(base, init, headers)
+import { getURL, setupClient } from './setup'
+
+/*****************************************************************************************************************/
+
+suite('@observerly/hyper Fiber API Rotator Client', () => {
+  describe('rotatorRoutes', () => {
+    it('should be able to determine the connection status of the rotator', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const { connected } = await client.rotator.isConnected()
+      expect(connected).toBe(true)
+    })
+  })
 })
-
-/*****************************************************************************************************************/

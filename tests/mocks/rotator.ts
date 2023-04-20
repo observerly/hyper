@@ -6,18 +6,20 @@
 
 /*****************************************************************************************************************/
 
-import { rotator } from './rotator'
-import { telescope } from './telescope'
+import { eventHandler, getMethod, readBody } from 'h3'
+
+import { type Handler } from '../shared/handler'
 
 /*****************************************************************************************************************/
 
-export const routes = (
-  base: URL = new URL('http://localhost:3000/api/v1'),
-  init?: RequestInit,
-  headers?: () => Headers | Promise<Headers>
-) => ({
-  rotator: rotator(base, init, headers),
-  telescope: telescope(base, init, headers)
-})
-
-/*****************************************************************************************************************/
+export const rotatorHandlers: Handler[] = [
+  {
+    method: 'GET',
+    url: '/api/v1/rotator/connected',
+    handler: eventHandler(_event => {
+      return {
+        connected: true
+      }
+    })
+  }
+]
