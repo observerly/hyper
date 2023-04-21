@@ -14,16 +14,28 @@ export const rotator = (
   base: URL,
   init?: RequestInit,
   headers?: () => Promise<Headers> | Headers
-) => [
-  {
-    name: 'isConnected',
-    action: <
-      T = {
-        connected: boolean
+) =>
+  [
+    {
+      name: 'isConnected',
+      action: <
+        T = {
+          connected: boolean
+        }
+      >() => {
+        const url = new URL('rotator/connected', base)
+        return dispatchRequest<T>(url, init, headers)
       }
-    >() => {
-      const url = new URL('rotator/connected', base)
-      return dispatchRequest<T>(url, init, headers)
+    },
+    {
+      name: 'initialise',
+      action: <
+        T = {
+          connected: boolean
+        }
+      >() => {
+        const url = new URL('rotator/init', base)
+        return dispatchRequest<T>(url, { ...init, method: 'PUT' }, headers)
+      }
     }
-  }
-]
+  ] as const
