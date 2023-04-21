@@ -9,7 +9,8 @@ export default defineConfig({
   test: {
     watch: false,
     setupFiles: ['./tests/setup.ts'],
-    passWithNoTests: true
+    passWithNoTests: true,
+    threads: false
   },
   plugins: [
     typescript({
