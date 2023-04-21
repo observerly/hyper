@@ -52,6 +52,18 @@ export const telescopeHandlers: Handler[] = [
     })
   },
   {
+    method: 'GET',
+    url: '/api/v1/telescope/coordinates',
+    handler: eventHandler(_event => {
+      return {
+        ra: 34.5619912,
+        dec: 56.1234567,
+        alt: 34.5619912,
+        az: 56.1234567
+      }
+    })
+  },
+  {
     method: 'PUT',
     url: '/api/v1/telescope/init',
     handler: eventHandler(event => {

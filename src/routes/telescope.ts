@@ -63,6 +63,20 @@ export const telescope = (
       }
     },
     {
+      name: 'getCoordinates',
+      action: <
+        T = {
+          ra: number
+          dec: number
+          az: number
+          alt: number
+        }
+      >() => {
+        const url = new URL('telescope/coordinates', base)
+        return dispatchRequest<T>(url, init, headers)
+      }
+    },
+    {
       name: 'initialise',
       action: <
         T = {

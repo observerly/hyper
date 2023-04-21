@@ -42,6 +42,7 @@ export const setupClient = (url: string) => {
     base: new URL(url),
     headers: async () => {
       return new Headers({
+        Accept: 'application/json',
         'X-API-Key': `Key <<API_KEY>>`
       })
     }
