@@ -21,5 +21,14 @@ export const rotatorHandlers: Handler[] = [
         connected: true
       }
     })
+  },
+  {
+    method: 'GET',
+    url: '/api/v1/rotator/init',
+    handler: eventHandler(_event => {
+      return {
+        connected: true
+      }
+    })
   }
 ]
