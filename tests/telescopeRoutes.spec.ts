@@ -61,6 +61,27 @@ suite('@observerly/hyper Fiber API Telescope Client', () => {
       expect(connected).toBe(false)
     })
 
+    it('should be able to get the equatorial and horizontal coordinates of the telescope', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const { ra, dec, az, alt } = await client.telescope.getCoordinates()
+
+      // Right Ascension should be between 0 and 360
+      expect(ra).toBeGreaterThanOrEqual(0)
+      expect(ra).toBeLessThan(360)
+
+      // Declination should be between -90 and 90
+      expect(dec).toBeGreaterThan(-90)
+      expect(dec).toBeLessThan(90)
+
+      // Azimuth should be between 0 and 360
+      expect(az).toBeGreaterThanOrEqual(0)
+      expect(az).toBeLessThan(360)
+
+      // Altitude should be between -90 and 90
+      expect(alt).toBeGreaterThan(-90)
+      expect(alt).toBeLessThan(90)
+    })
+
     it('should be able to set the equatorial coordinates of the telescope', async () => {
       const client = setupClient(getURL('/api/v1/'))
       const { slewing } = await client.telescope.slewToEquatorialCoordinate({
