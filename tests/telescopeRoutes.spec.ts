@@ -54,6 +54,23 @@ suite('@observerly/hyper Fiber API Telescope Client', () => {
       })
     })
 
+    it('should be able to determine the status of the telescope', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const status = await client.telescope.getStatus()
+      expect(isDataResult(status)).toBe(true)
+      if (!isDataResult(status)) return
+      // Create a UTC now string:
+      const utc = new Date('2021-05-14T00:00:00.000+00:00').toISOString()
+      expect(status).toStrictEqual({
+        connected: true,
+        slewing: false,
+        tracking: false,
+        parked: false,
+        home: false,
+        utc
+      })
+    })
+
     it('should be able to initialise the telescope', async () => {
       const client = setupClient(getURL('/api/v1/'))
       const init = await client.telescope.initialise()

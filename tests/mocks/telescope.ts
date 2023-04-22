@@ -64,6 +64,22 @@ export const telescopeHandlers: Handler[] = [
     })
   },
   {
+    method: 'GET',
+    url: '/api/v1/telescope/status',
+    handler: eventHandler(_event => {
+      const utc = new Date('2021-05-14T00:00:00.000+00:00').toISOString()
+
+      return {
+        connected: true,
+        slewing: false,
+        tracking: false,
+        parked: false,
+        home: false,
+        utc
+      }
+    })
+  },
+  {
     method: 'PUT',
     url: '/api/v1/telescope/init',
     handler: eventHandler(event => {

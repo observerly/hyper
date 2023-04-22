@@ -77,6 +77,22 @@ export const telescope = (
       }
     },
     {
+      name: 'getStatus',
+      action: <
+        T = {
+          connected: boolean
+          slewing: boolean
+          tracking: boolean
+          parked: boolean
+          home: boolean
+          utc: string
+        }
+      >() => {
+        const url = new URL('telescope/status', base)
+        return dispatchRequest<T>(url, init, headers)
+      }
+    },
+    {
       name: 'initialise',
       action: <
         T = {
