@@ -6,10 +6,6 @@
 
 /*****************************************************************************************************************/
 
-export { routes } from './routes'
-
-export { createHyperClient } from './client'
-
-export { isDataResult } from './helpers'
+export { isDataResult } from './isDataResult'
 
 /*****************************************************************************************************************/

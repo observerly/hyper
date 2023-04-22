@@ -6,10 +6,22 @@
 
 /*****************************************************************************************************************/
 
-export { routes } from './routes'
+import { describe, expect, it, suite } from 'vitest'
 
-export { createHyperClient } from './client'
-
-export { isDataResult } from './helpers'
+import { isDataResult } from '../src'
 
 /*****************************************************************************************************************/
+
+suite('@observerly/hyper Guards', () => {
+  describe('isDataResult Type Guard', () => {
+    it('should be a data result', () => {
+      const result = { connected: true }
+      expect(isDataResult(result)).toBe(true)
+    })
+
+    it('should not be a data result', () => {
+      const result = { error: { message: 'An unknown error occured.' } }
+      expect(isDataResult(result)).toBe(false)
+    })
+  })
+})

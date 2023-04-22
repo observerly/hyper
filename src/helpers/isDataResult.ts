@@ -6,10 +6,12 @@
 
 /*****************************************************************************************************************/
 
-export { routes } from './routes'
+import { type HandlerError } from '../internals/handler'
 
-export { createHyperClient } from './client'
+/*****************************************************************************************************************/
 
-export { isDataResult } from './helpers'
+export function isDataResult<T>(result: T | HandlerError): result is T {
+  return result !== undefined && (result as HandlerError).error === undefined
+}
 
 /*****************************************************************************************************************/
