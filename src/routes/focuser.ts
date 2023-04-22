@@ -6,20 +6,25 @@
 
 /*****************************************************************************************************************/
 
-import { focuser } from './focuser'
-import { rotator } from './rotator'
-import { telescope } from './telescope'
+import { dispatchRequest } from '../internals/dispatchRequest'
 
 /*****************************************************************************************************************/
 
-export const routes = (
-  base: URL = new URL('http://localhost:3000/api/v1'),
+export const focuser = (
+  base: URL,
   init?: RequestInit,
-  headers?: () => Headers | Promise<Headers>
-) => ({
-  focuser: focuser(base, init, headers),
-  rotator: rotator(base, init, headers),
-  telescope: telescope(base, init, headers)
-})
-
-/*****************************************************************************************************************/
+  headers?: () => Promise<Headers> | Headers
+) =>
+  [
+    {
+      name: 'isConnected',
+      action: <
+        T = {
+          connected: boolean
+        }
+      >() => {
+        const url = new URL('focuser/connected', base)
+        return dispatchRequest<T>(url, init, headers)
+      }
+    }
+  ] as const

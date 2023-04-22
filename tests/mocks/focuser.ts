@@ -6,21 +6,20 @@
 
 /*****************************************************************************************************************/
 
-import { baseHandlers } from './base'
-
-import { focuserHandlers } from './focuser'
-import { rotatorHandlers } from './rotator'
-import { telescopeHandlers } from './telescope'
+import { eventHandler } from 'h3'
 
 import { type Handler } from '../shared/handler'
 
 /*****************************************************************************************************************/
 
-export const handlers: Handler[] = [
-  ...baseHandlers,
-  ...focuserHandlers,
-  ...rotatorHandlers,
-  ...telescopeHandlers
+export const focuserHandlers: Handler[] = [
+  {
+    method: 'GET',
+    url: '/api/v1/focuser/connected',
+    handler: eventHandler(_event => {
+      return {
+        connected: true
+      }
+    })
+  }
 ]
-
-/*****************************************************************************************************************/
