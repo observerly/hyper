@@ -21,5 +21,17 @@ export const focuserHandlers: Handler[] = [
         connected: true
       }
     })
+  },
+  {
+    method: 'GET',
+    url: '/api/v1/focuser/config',
+    handler: eventHandler(_event => {
+      return {
+        absolutePosition: true,
+        maxIncrement: 5,
+        maxStep: 25000,
+        stepSize: 10
+      }
+    })
   }
 ]
