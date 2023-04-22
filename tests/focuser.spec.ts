@@ -6,20 +6,20 @@
 
 /*****************************************************************************************************************/
 
-import { focuser } from './focuser'
-import { rotator } from './rotator'
-import { telescope } from './telescope'
+import { describe, expect, it, suite } from 'vitest'
 
 /*****************************************************************************************************************/
 
-export const routes = (
-  base: URL = new URL('http://localhost:3000/api/v1'),
-  init?: RequestInit,
-  headers?: () => Headers | Promise<Headers>
-) => ({
-  focuser: focuser(base, init, headers),
-  rotator: rotator(base, init, headers),
-  telescope: telescope(base, init, headers)
+import { getURL, setupClient } from './setup'
+
+/*****************************************************************************************************************/
+
+suite('@observerly/hyper Fiber API Focuser Client', () => {
+  describe('focuserRoutes', () => {
+    it('should be able to determine the connection status of the focuser', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const { connected } = await client.focuser.isConnected()
+      expect(connected).toBe(true)
+    })
+  })
 })
-
-/*****************************************************************************************************************/
