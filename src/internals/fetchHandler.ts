@@ -8,6 +8,14 @@
 
 import { $fetch, type FetchOptions } from 'ofetch'
 
+import { type HandlerError } from './handler'
+
+/*****************************************************************************************************************/
+
+type MaybeErrorResponse<T> = T | HandlerError
+
+type FetchHandlerReturn<T> = Promise<MaybeErrorResponse<T>>
+
 /*****************************************************************************************************************/
 
 /**
@@ -23,7 +31,7 @@ import { $fetch, type FetchOptions } from 'ofetch'
  * @returns - promise of unwrapped Response of generic data type <T>
  *
  */
-export const fetchHandler = <T>(req: Request, data?: string) => {
+export const fetchHandler = <T>(req: Request, data?: string): FetchHandlerReturn<T> => {
   const { url, method, headers } = req
 
   let options = {
@@ -39,7 +47,25 @@ export const fetchHandler = <T>(req: Request, data?: string) => {
     }
   }
 
-  return $fetch<T>(url, options)
+  try {
+    return $fetch<T>(url, options)
+  } catch (error) {
+    if (error instanceof Error) {
+      return Promise.resolve({
+        error: error.message
+      })
+    }
+
+    if (typeof error === 'string') {
+      return Promise.resolve({
+        error
+      })
+    }
+
+    return Promise.resolve({
+      error: 'An unknown error occurred.'
+    })
+  }
 }
 
 /*****************************************************************************************************************/
