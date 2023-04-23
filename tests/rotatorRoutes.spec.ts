@@ -26,6 +26,14 @@ suite('@observerly/hyper Fiber API Rotator Client', () => {
       expect(isConnected).toStrictEqual({ connected: true })
     })
 
+    it('should be able to determine the status of the rotator', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const status = await client.rotator.getStatus()
+      expect(isDataResult(status)).toBe(true)
+      if (!isDataResult(status)) return
+      expect(status).toStrictEqual({ connected: true, moving: false, position: 0 })
+    })
+
     it('should be able to determine the connection status of the rotator', async () => {
       const client = setupClient(getURL('/api/v1/'))
       const init = await client.rotator.initialise()
