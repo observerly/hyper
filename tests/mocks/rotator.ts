@@ -24,6 +24,17 @@ export const rotatorHandlers: Handler[] = [
   },
   {
     method: 'GET',
+    url: '/api/v1/rotator/status',
+    handler: eventHandler(_event => {
+      return {
+        connected: true,
+        moving: false,
+        position: 0
+      }
+    })
+  },
+  {
+    method: 'GET',
     url: '/api/v1/rotator/init',
     handler: eventHandler(_event => {
       return {

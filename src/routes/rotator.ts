@@ -28,6 +28,19 @@ export const rotator = (
       }
     },
     {
+      name: 'getStatus',
+      action: <
+        T = {
+          connected: boolean
+          moving: boolean
+          position: number
+        }
+      >() => {
+        const url = new URL('rotator/status', base)
+        return dispatchRequest<T>(url, init, headers)
+      }
+    },
+    {
       name: 'initialise',
       action: <
         T = {
