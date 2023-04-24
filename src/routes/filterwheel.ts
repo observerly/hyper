@@ -82,5 +82,28 @@ export const filterwheel = (
           data
         )
       }
+    },
+    {
+      name: 'disconnect',
+      action: <
+        T = {
+          connected: boolean
+        }
+      >() => {
+        const url = new URL('filterwheel/connect', base)
+
+        const data = JSON.stringify({ connect: false })
+
+        return dispatchRequest<T>(
+          url,
+          {
+            ...init,
+            method: 'PUT',
+            body: JSON.stringify({ connect: false })
+          },
+          headers,
+          data
+        )
+      }
     }
   ] as const
