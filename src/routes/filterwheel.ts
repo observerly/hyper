@@ -26,5 +26,16 @@ export const filterwheel = (
         const url = new URL('filterwheel/connected', base)
         return dispatchRequest<T>(url, init, headers)
       }
+    },
+    {
+      name: 'getPosition',
+      action: <
+        T = {
+          position: number
+        }
+      >() => {
+        const url = new URL('filterwheel/position', base)
+        return dispatchRequest<T>(url, init, headers)
+      }
     }
   ] as const
