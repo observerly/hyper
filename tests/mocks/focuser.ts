@@ -33,5 +33,14 @@ export const focuserHandlers: Handler[] = [
         stepSize: 10
       }
     })
+  },
+  {
+    method: 'GET',
+    url: '/api/v1/focuser/position',
+    handler: eventHandler(_event => {
+      return {
+        position: 10000
+      }
+    })
   }
 ]

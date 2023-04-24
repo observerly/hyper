@@ -40,5 +40,16 @@ export const focuser = (
         const url = new URL('focuser/config', base)
         return dispatchRequest<T>(url, init, headers)
       }
+    },
+    {
+      name: 'getPosition',
+      action: <
+        T = {
+          position: number
+        }
+      >() => {
+        const url = new URL('focuser/position', base)
+        return dispatchRequest<T>(url, init, headers)
+      }
     }
   ] as const
