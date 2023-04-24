@@ -51,5 +51,16 @@ export const focuser = (
         const url = new URL('focuser/position', base)
         return dispatchRequest<T>(url, init, headers)
       }
+    },
+    {
+      name: 'getTemperature',
+      action: <
+        T = {
+          temperature: number
+        }
+      >() => {
+        const url = new URL('focuser/temperature', base)
+        return dispatchRequest<T>(url, init, headers)
+      }
     }
   ] as const
