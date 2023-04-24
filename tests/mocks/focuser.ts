@@ -6,7 +6,7 @@
 
 /*****************************************************************************************************************/
 
-import { eventHandler } from 'h3'
+import { eventHandler, getMethod } from 'h3'
 
 import { type Handler } from '../shared/handler'
 
@@ -60,6 +60,24 @@ export const focuserHandlers: Handler[] = [
         connected: true,
         moving: false,
         position: 10000
+      }
+    })
+  },
+  {
+    method: 'PUT',
+    url: '/api/v1/focuser/init',
+    handler: eventHandler(event => {
+      const method = getMethod(event)
+
+      if (method !== 'PUT') {
+        return new Response('Method Not Allowed', {
+          status: 405,
+          statusText: 'Method Not Allowed'
+        })
+      }
+
+      return {
+        connected: true
       }
     })
   }
