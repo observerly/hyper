@@ -82,5 +82,13 @@ suite('@observerly/hyper Fiber API Focuser Client', () => {
       if (!isDataResult(connect)) return
       expect(connect).toStrictEqual({ connected: true })
     })
+
+    it('should be able to disconnect to the focuser', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const connect = await client.focuser.disconnect()
+      expect(isDataResult(connect)).toBe(true)
+      if (!isDataResult(connect)) return
+      expect(connect).toStrictEqual({ connected: false })
+    })
   })
 })
