@@ -57,5 +57,32 @@ export const filterwheelHandlers: Handler[] = [
         connected: true
       }
     })
+  },
+  {
+    method: 'PUT',
+    url: '/api/v1/filterwheel/connect',
+    handler: eventHandler(async event => {
+      const method = getMethod(event)
+
+      if (method !== 'PUT') {
+        return new Response('Method Not Allowed', {
+          status: 405,
+          statusText: 'Method Not Allowed'
+        })
+      }
+
+      const body = await readBody<{ connect: boolean }>(event)
+
+      if (!body) {
+        return new Response('Bad Request', {
+          status: 400,
+          statusText: 'Bad Request'
+        })
+      }
+
+      return {
+        connected: body.connect
+      }
+    })
   }
 ]
