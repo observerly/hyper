@@ -48,5 +48,16 @@ export const filterwheel = (
         const url = new URL('filterwheel/names', base)
         return dispatchRequest<T>(url, init, headers)
       }
+    },
+    {
+      name: 'initialise',
+      action: <
+        T = {
+          connected: boolean
+        }
+      >() => {
+        const url = new URL('filterwheel/init', base)
+        return dispatchRequest<T>(url, { ...init, method: 'PUT' }, headers)
+      }
     }
   ] as const
