@@ -75,5 +75,16 @@ export const focuser = (
         const url = new URL('focuser/status', base)
         return dispatchRequest<T>(url, init, headers)
       }
+    },
+    {
+      name: 'initialise',
+      action: <
+        T = {
+          connected: boolean
+        }
+      >() => {
+        const url = new URL('focuser/init', base)
+        return dispatchRequest<T>(url, { ...init, method: 'PUT' }, headers)
+      }
     }
   ] as const

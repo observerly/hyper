@@ -66,5 +66,13 @@ suite('@observerly/hyper Fiber API Focuser Client', () => {
         position: 10000
       })
     })
+
+    it('should be able to initialise the focuser', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const init = await client.focuser.initialise()
+      expect(isDataResult(init)).toBe(true)
+      if (!isDataResult(init)) return
+      expect(init).toStrictEqual({ connected: true })
+    })
   })
 })
