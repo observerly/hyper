@@ -46,5 +46,13 @@ suite('@observerly/hyper Fiber API Focuser Client', () => {
       if (!isDataResult(position)) return
       expect(position).toStrictEqual({ position: 10000 })
     })
+
+    it('should be able to determine the temperature of the focuser', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const temperature = await client.focuser.getTemperature()
+      expect(isDataResult(temperature)).toBe(true)
+      if (!isDataResult(temperature)) return
+      expect(temperature).toStrictEqual({ temperature: 20 })
+    })
   })
 })
