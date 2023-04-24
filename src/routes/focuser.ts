@@ -157,5 +157,16 @@ export const focuser = (
           data
         )
       }
+    },
+    {
+      name: 'halt',
+      action: <
+        T = {
+          position: number
+        }
+      >() => {
+        const url = new URL('focuser/position', base)
+        return dispatchRequest<T>(url, { ...init, method: 'DELETE' }, headers)
+      }
     }
   ] as const
