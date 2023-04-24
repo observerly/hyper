@@ -38,5 +38,13 @@ suite('@observerly/hyper Fiber API Focuser Client', () => {
         stepSize: 10
       })
     })
+
+    it('should be able to determine the position of the focuser', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const position = await client.focuser.getPosition()
+      expect(isDataResult(position)).toBe(true)
+      if (!isDataResult(position)) return
+      expect(position).toStrictEqual({ position: 10000 })
+    })
   })
 })
