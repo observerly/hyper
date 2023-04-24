@@ -39,5 +39,23 @@ export const filterwheelHandlers: Handler[] = [
         names: ['R', 'G', 'B', 'Ha', 'OIII', 'SII', 'L']
       }
     })
+  },
+  {
+    method: 'PUT',
+    url: '/api/v1/filterwheel/init',
+    handler: eventHandler(async event => {
+      const method = getMethod(event)
+
+      if (method !== 'PUT') {
+        return new Response('Method Not Allowed', {
+          status: 405,
+          statusText: 'Method Not Allowed'
+        })
+      }
+
+      return {
+        connected: true
+      }
+    })
   }
 ]

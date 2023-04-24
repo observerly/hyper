@@ -41,5 +41,13 @@ suite('@observerly/hyper Fiber API Filterwheel Client', () => {
       if (!isDataResult(names)) return
       expect(names).toStrictEqual({ names: ['R', 'G', 'B', 'Ha', 'OIII', 'SII', 'L'] })
     })
+
+    it('should be able to initialise the filterwheel', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const init = await client.filterwheel.initialise()
+      expect(isDataResult(init)).toBe(true)
+      if (!isDataResult(init)) return
+      expect(init).toStrictEqual({ connected: true })
+    })
   })
 })
