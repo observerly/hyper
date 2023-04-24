@@ -37,5 +37,16 @@ export const filterwheel = (
         const url = new URL('filterwheel/position', base)
         return dispatchRequest<T>(url, init, headers)
       }
+    },
+    {
+      name: 'getNames',
+      action: <
+        T = {
+          names: string[]
+        }
+      >() => {
+        const url = new URL('filterwheel/names', base)
+        return dispatchRequest<T>(url, init, headers)
+      }
     }
   ] as const

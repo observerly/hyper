@@ -30,5 +30,14 @@ export const filterwheelHandlers: Handler[] = [
         position: 0
       }
     })
+  },
+  {
+    method: 'GET',
+    url: '/api/v1/filterwheel/names',
+    handler: eventHandler(_event => {
+      return {
+        names: ['R', 'G', 'B', 'Ha', 'OIII', 'SII', 'L']
+      }
+    })
   }
 ]
