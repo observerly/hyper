@@ -51,5 +51,16 @@ export const focuserHandlers: Handler[] = [
         temperature: 20
       }
     })
+  },
+  {
+    method: 'GET',
+    url: '/api/v1/focuser/status',
+    handler: eventHandler(_event => {
+      return {
+        connected: true,
+        moving: false,
+        position: 10000
+      }
+    })
   }
 ]
