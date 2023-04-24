@@ -21,5 +21,14 @@ export const filterwheelHandlers: Handler[] = [
         connected: true
       }
     })
+  },
+  {
+    method: 'GET',
+    url: '/api/v1/filterwheel/position',
+    handler: eventHandler(_event => {
+      return {
+        position: 0
+      }
+    })
   }
 ]
