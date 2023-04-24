@@ -90,5 +90,13 @@ suite('@observerly/hyper Fiber API Focuser Client', () => {
       if (!isDataResult(connect)) return
       expect(connect).toStrictEqual({ connected: false })
     })
+
+    it('should be able to set the position of the focuser', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const position = await client.focuser.setPosition({ position: 11500 })
+      expect(isDataResult(position)).toBe(true)
+      if (!isDataResult(position)) return
+      expect(position).toStrictEqual({ position: 11500 })
+    })
   })
 })

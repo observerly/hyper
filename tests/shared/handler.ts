@@ -18,7 +18,7 @@ export interface Handler extends Record<string, unknown> {
    *
    *
    */
-  method: string
+  method: string | string[]
   /**
    *
    *
