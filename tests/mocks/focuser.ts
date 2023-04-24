@@ -36,15 +36,6 @@ export const focuserHandlers: Handler[] = [
   },
   {
     method: 'GET',
-    url: '/api/v1/focuser/position',
-    handler: eventHandler(_event => {
-      return {
-        position: 10000
-      }
-    })
-  },
-  {
-    method: 'GET',
     url: '/api/v1/focuser/temperature',
     handler: eventHandler(_event => {
       return {
@@ -105,6 +96,45 @@ export const focuserHandlers: Handler[] = [
 
       return {
         connected: body.connect
+      }
+    })
+  },
+  {
+    method: ['GET', 'PUT', 'DELETE'],
+    url: '/api/v1/focuser/position',
+    handler: eventHandler(async event => {
+      const method = getMethod(event)
+
+      if (!['GET', 'PUT', 'DELETE'].includes(method)) {
+        return new Response('Method Not Allowed', {
+          status: 405,
+          statusText: 'Method Not Allowed'
+        })
+      }
+
+      if (method === 'GET') {
+        return {
+          position: 10000
+        }
+      }
+
+      if (method === 'DELETE') {
+        return {
+          position: 0
+        }
+      }
+
+      const body = await readBody<{ position: number }>(event)
+
+      if (!body) {
+        return new Response('Bad Request', {
+          status: 400,
+          statusText: 'Bad Request'
+        })
+      }
+
+      return {
+        position: body.position
       }
     })
   }
