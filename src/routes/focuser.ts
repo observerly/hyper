@@ -86,5 +86,28 @@ export const focuser = (
         const url = new URL('focuser/init', base)
         return dispatchRequest<T>(url, { ...init, method: 'PUT' }, headers)
       }
+    },
+    {
+      name: 'connect',
+      action: <
+        T = {
+          connected: boolean
+        }
+      >() => {
+        const url = new URL('focuser/connect', base)
+
+        const data = JSON.stringify({ connect: true })
+
+        return dispatchRequest<T>(
+          url,
+          {
+            ...init,
+            method: 'PUT',
+            body: JSON.stringify({ connect: true })
+          },
+          headers,
+          data
+        )
+      }
     }
   ] as const
