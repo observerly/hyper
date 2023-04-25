@@ -6,25 +6,20 @@
 
 /*****************************************************************************************************************/
 
-import { baseHandlers } from './base'
-
-import { domeHandlers } from './dome'
-import { filterwheelHandlers } from './filterwheel'
-import { focuserHandlers } from './focuser'
-import { rotatorHandlers } from './rotator'
-import { telescopeHandlers } from './telescope'
+import { eventHandler } from 'h3'
 
 import { type Handler } from '../shared/handler'
 
 /*****************************************************************************************************************/
 
-export const handlers: Handler[] = [
-  ...baseHandlers,
-  ...domeHandlers,
-  ...filterwheelHandlers,
-  ...focuserHandlers,
-  ...rotatorHandlers,
-  ...telescopeHandlers
+export const domeHandlers: Handler[] = [
+  {
+    method: 'GET',
+    url: '/api/v1/dome/connected',
+    handler: eventHandler(_event => {
+      return {
+        connected: true
+      }
+    })
+  }
 ]
-
-/*****************************************************************************************************************/
