@@ -21,5 +21,14 @@ export const domeHandlers: Handler[] = [
         connected: true
       }
     })
+  },
+  {
+    method: 'GET',
+    url: '/api/v1/dome/slewing',
+    handler: eventHandler(_event => {
+      return {
+        slewing: true
+      }
+    })
   }
 ]

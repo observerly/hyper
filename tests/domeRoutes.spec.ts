@@ -25,5 +25,13 @@ suite('@observerly/hyper Fiber API Dome Client', () => {
       if (!isDataResult(isConnected)) return
       expect(isConnected).toStrictEqual({ connected: true })
     })
+
+    it('should be able to determine the slewing status of the dome', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const isSlewing = await client.dome.isSlewing()
+      expect(isDataResult(isSlewing)).toBe(true)
+      if (!isDataResult(isSlewing)) return
+      expect(isSlewing).toStrictEqual({ slewing: true })
+    })
   })
 })

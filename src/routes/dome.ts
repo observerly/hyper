@@ -22,5 +22,16 @@ export const dome = (base: URL, init?: RequestInit, headers?: () => Promise<Head
         const url = new URL('dome/connected', base)
         return dispatchRequest<T>(url, init, headers)
       }
+    },
+    {
+      name: 'isSlewing',
+      action: <
+        T = {
+          slewing: boolean
+        }
+      >() => {
+        const url = new URL('dome/slewing', base)
+        return dispatchRequest<T>(url, init, headers)
+      }
     }
   ] as const
