@@ -45,5 +45,21 @@ export const dome = (base: URL, init?: RequestInit, headers?: () => Promise<Head
         const url = new URL('dome/coordinates', base)
         return dispatchRequest<T>(url, init, headers)
       }
+    },
+    {
+      name: 'getStatus',
+      action: <
+        T = {
+          connected: boolean
+          slewing: boolean
+          slaved: boolean
+          parked: boolean
+          home: boolean
+          shutter: string
+        }
+      >() => {
+        const url = new URL('dome/status', base)
+        return dispatchRequest<T>(url, init, headers)
+      }
     }
   ] as const

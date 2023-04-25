@@ -41,5 +41,20 @@ suite('@observerly/hyper Fiber API Dome Client', () => {
       if (!isDataResult(coordinates)) return
       expect(coordinates).toStrictEqual({ alt: 34.5619912, az: 56.1234567 })
     })
+
+    it('should be able to determine the status of the dome', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const status = await client.dome.getStatus()
+      expect(isDataResult(status)).toBe(true)
+      if (!isDataResult(status)) return
+      expect(status).toStrictEqual({
+        connected: true,
+        slewing: true,
+        slaved: true,
+        parked: true,
+        home: true,
+        shutter: 'open'
+      })
+    })
   })
 })
