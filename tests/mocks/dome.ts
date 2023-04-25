@@ -30,5 +30,15 @@ export const domeHandlers: Handler[] = [
         slewing: true
       }
     })
+  },
+  {
+    method: 'GET',
+    url: '/api/v1/dome/coordinates',
+    handler: eventHandler(_event => {
+      return {
+        alt: 34.5619912,
+        az: 56.1234567
+      }
+    })
   }
 ]
