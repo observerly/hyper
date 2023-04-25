@@ -33,5 +33,13 @@ suite('@observerly/hyper Fiber API Dome Client', () => {
       if (!isDataResult(isSlewing)) return
       expect(isSlewing).toStrictEqual({ slewing: true })
     })
+
+    it('should be able to determine the coordinates of the dome', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const coordinates = await client.dome.getCoordinates()
+      expect(isDataResult(coordinates)).toBe(true)
+      if (!isDataResult(coordinates)) return
+      expect(coordinates).toStrictEqual({ alt: 34.5619912, az: 56.1234567 })
+    })
   })
 })

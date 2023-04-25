@@ -33,5 +33,17 @@ export const dome = (base: URL, init?: RequestInit, headers?: () => Promise<Head
         const url = new URL('dome/slewing', base)
         return dispatchRequest<T>(url, init, headers)
       }
+    },
+    {
+      name: 'getCoordinates',
+      action: <
+        T = {
+          alt: number
+          az: number
+        }
+      >() => {
+        const url = new URL('dome/coordinates', base)
+        return dispatchRequest<T>(url, init, headers)
+      }
     }
   ] as const
