@@ -105,5 +105,30 @@ export const filterwheel = (
           data
         )
       }
+    },
+    {
+      name: 'setPosition',
+      action: <
+        T = {
+          position: number
+        }
+      >(body: {
+        position: number
+      }) => {
+        const url = new URL('filterwheel/position', base)
+
+        const data = JSON.stringify(body)
+
+        return dispatchRequest<T>(
+          url,
+          {
+            ...init,
+            method: 'PUT',
+            body: JSON.stringify(body)
+          },
+          headers,
+          data
+        )
+      }
     }
   ] as const

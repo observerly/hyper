@@ -23,9 +23,26 @@ export const filterwheelHandlers: Handler[] = [
     })
   },
   {
-    method: 'GET',
+    method: ['GET', 'PUT'],
     url: '/api/v1/filterwheel/position',
-    handler: eventHandler(_event => {
+    handler: eventHandler(async event => {
+      const method = getMethod(event)
+
+      if (method === 'PUT') {
+        const body = await readBody<{ position: number }>(event)
+
+        if (!body) {
+          return new Response('Bad Request', {
+            status: 400,
+            statusText: 'Bad Request'
+          })
+        }
+
+        return {
+          position: body.position
+        }
+      }
+
       return {
         position: 0
       }
