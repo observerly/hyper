@@ -6,6 +6,7 @@
 
 /*****************************************************************************************************************/
 
+import { dome } from './dome'
 import { filterwheel } from './filterwheel'
 import { focuser } from './focuser'
 import { rotator } from './rotator'
@@ -18,6 +19,7 @@ export const routes = (
   init?: RequestInit,
   headers?: () => Headers | Promise<Headers>
 ) => ({
+  dome: dome(base, init, headers),
   filterwheel: filterwheel(base, init, headers),
   focuser: focuser(base, init, headers),
   rotator: rotator(base, init, headers),
