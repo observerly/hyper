@@ -40,5 +40,19 @@ export const domeHandlers: Handler[] = [
         az: 56.1234567
       }
     })
+  },
+  {
+    method: 'GET',
+    url: '/api/v1/dome/status',
+    handler: eventHandler(_event => {
+      return {
+        connected: true,
+        slewing: true,
+        slaved: true,
+        parked: true,
+        home: true,
+        shutter: 'open'
+      }
+    })
   }
 ]
