@@ -73,5 +73,13 @@ suite('@observerly/hyper Fiber API Filterwheel Client', () => {
       if (!isDataResult(position)) return
       expect(position).toStrictEqual({ position: 0 })
     })
+
+    it('should be able to set the position of the filterwheel using the filter name', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const position = await client.filterwheel.setFilter({ filter: 'R' })
+      expect(isDataResult(position)).toBe(true)
+      if (!isDataResult(position)) return
+      expect(position).toStrictEqual({ position: 1 })
+    })
   })
 })

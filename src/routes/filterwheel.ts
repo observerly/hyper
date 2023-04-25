@@ -130,5 +130,30 @@ export const filterwheel = (
           data
         )
       }
+    },
+    {
+      name: 'setFilter',
+      action: <
+        T = {
+          position: number
+        }
+      >(body: {
+        filter: string
+      }) => {
+        const url = new URL('filterwheel/name', base)
+
+        const data = JSON.stringify(body)
+
+        return dispatchRequest<T>(
+          url,
+          {
+            ...init,
+            method: 'PUT',
+            body: JSON.stringify(body)
+          },
+          headers,
+          data
+        )
+      }
     }
   ] as const
