@@ -90,5 +90,32 @@ export const domeHandlers: Handler[] = [
         connected: body.connect
       }
     })
+  },
+  {
+    method: 'PUT',
+    url: '/api/v1/dome/shutter',
+    handler: eventHandler(async event => {
+      const method = getMethod(event)
+
+      if (method !== 'PUT') {
+        return new Response('Method Not Allowed', {
+          status: 405,
+          statusText: 'Method Not Allowed'
+        })
+      }
+
+      const body = await readBody<{ open?: boolean; close?: boolean }>(event)
+
+      if (!body) {
+        return new Response('Bad Request', {
+          status: 400,
+          statusText: 'Bad Request'
+        })
+      }
+
+      return {
+        status: body.open ? 'open' : 'closed'
+      }
+    })
   }
 ]

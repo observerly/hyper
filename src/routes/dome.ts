@@ -118,5 +118,28 @@ export const dome = (base: URL, init?: RequestInit, headers?: () => Promise<Head
           data
         )
       }
+    },
+    {
+      name: 'openShutter',
+      action: <
+        T = {
+          status: string
+        }
+      >() => {
+        const url = new URL('dome/shutter', base)
+
+        const data = JSON.stringify({ open: true })
+
+        return dispatchRequest<T>(
+          url,
+          {
+            ...init,
+            method: 'PUT',
+            body: JSON.stringify({ open: true })
+          },
+          headers,
+          data
+        )
+      }
     }
   ] as const

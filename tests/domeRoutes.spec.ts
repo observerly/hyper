@@ -80,5 +80,13 @@ suite('@observerly/hyper Fiber API Dome Client', () => {
       if (!isDataResult(disconnect)) return
       expect(disconnect).toStrictEqual({ connected: false })
     })
+
+    it('should be able to open the dome shutter', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const open = await client.dome.openShutter()
+      expect(isDataResult(open)).toBe(true)
+      if (!isDataResult(open)) return
+      expect(open).toStrictEqual({ status: 'open' })
+    })
   })
 })
