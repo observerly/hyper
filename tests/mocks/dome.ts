@@ -6,7 +6,7 @@
 
 /*****************************************************************************************************************/
 
-import { eventHandler } from 'h3'
+import { eventHandler, getMethod, readBody } from 'h3'
 
 import { type Handler } from '../shared/handler'
 
@@ -67,9 +67,27 @@ export const domeHandlers: Handler[] = [
   {
     method: 'PUT',
     url: '/api/v1/dome/connect',
-    handler: eventHandler(_event => {
+    handler: eventHandler(async event => {
+      const method = getMethod(event)
+
+      if (method !== 'PUT') {
+        return new Response('Method Not Allowed', {
+          status: 405,
+          statusText: 'Method Not Allowed'
+        })
+      }
+
+      const body = await readBody<{ connect: boolean }>(event)
+
+      if (!body) {
+        return new Response('Bad Request', {
+          status: 400,
+          statusText: 'Bad Request'
+        })
+      }
+
       return {
-        connected: true
+        connected: body.connect
       }
     })
   }
