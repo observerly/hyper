@@ -61,5 +61,16 @@ export const dome = (base: URL, init?: RequestInit, headers?: () => Promise<Head
         const url = new URL('dome/status', base)
         return dispatchRequest<T>(url, init, headers)
       }
+    },
+    {
+      name: 'initialise',
+      action: <
+        T = {
+          connected: boolean
+        }
+      >() => {
+        const url = new URL('dome/init', base)
+        return dispatchRequest<T>(url, init, headers)
+      }
     }
   ] as const

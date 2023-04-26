@@ -56,5 +56,13 @@ suite('@observerly/hyper Fiber API Dome Client', () => {
         shutter: 'open'
       })
     })
+
+    it('should be able to initialize the dome', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const init = await client.dome.initialise()
+      expect(isDataResult(init)).toBe(true)
+      if (!isDataResult(init)) return
+      expect(init).toStrictEqual({ connected: true })
+    })
   })
 })

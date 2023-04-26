@@ -54,5 +54,14 @@ export const domeHandlers: Handler[] = [
         shutter: 'open'
       }
     })
+  },
+  {
+    method: 'PUT',
+    url: '/api/v1/dome/init',
+    handler: eventHandler(_event => {
+      return {
+        connected: true
+      }
+    })
   }
 ]
