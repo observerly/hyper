@@ -95,5 +95,28 @@ export const dome = (base: URL, init?: RequestInit, headers?: () => Promise<Head
           data
         )
       }
+    },
+    {
+      name: 'disconnect',
+      action: <
+        T = {
+          connected: boolean
+        }
+      >() => {
+        const url = new URL('dome/connect', base)
+
+        const data = JSON.stringify({ connect: false })
+
+        return dispatchRequest<T>(
+          url,
+          {
+            ...init,
+            method: 'PUT',
+            body: JSON.stringify({ connect: false })
+          },
+          headers,
+          data
+        )
+      }
     }
   ] as const
