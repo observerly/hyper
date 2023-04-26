@@ -63,5 +63,14 @@ export const domeHandlers: Handler[] = [
         connected: true
       }
     })
+  },
+  {
+    method: 'PUT',
+    url: '/api/v1/dome/connect',
+    handler: eventHandler(_event => {
+      return {
+        connected: true
+      }
+    })
   }
 ]
