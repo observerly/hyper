@@ -164,5 +164,28 @@ export const dome = (base: URL, init?: RequestInit, headers?: () => Promise<Head
           data
         )
       }
+    },
+    {
+      name: 'couple',
+      action: <
+        T = {
+          coupled: boolean
+        }
+      >() => {
+        const url = new URL('dome/couple', base)
+
+        const data = JSON.stringify({ couple: true })
+
+        return dispatchRequest<T>(
+          url,
+          {
+            ...init,
+            method: 'PUT',
+            body: JSON.stringify({ couple: true })
+          },
+          headers,
+          data
+        )
+      }
     }
   ] as const
