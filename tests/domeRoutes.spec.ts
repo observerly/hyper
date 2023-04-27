@@ -96,5 +96,13 @@ suite('@observerly/hyper Fiber API Dome Client', () => {
       if (!isDataResult(close)) return
       expect(close).toStrictEqual({ status: 'closed' })
     })
+
+    it('should be able to couple the dome to the telescope', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const couple = await client.dome.couple()
+      expect(isDataResult(couple)).toBe(true)
+      if (!isDataResult(couple)) return
+      expect(couple).toStrictEqual({ coupled: true })
+    })
   })
 })
