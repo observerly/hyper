@@ -68,7 +68,7 @@ export const monitor = (
           connected: boolean
         }
       >() => {
-        const url = new URL('telescope/connect', base)
+        const url = new URL('monitor/connect', base)
 
         const data = JSON.stringify({ connect: true })
 
@@ -78,6 +78,29 @@ export const monitor = (
             ...init,
             method: 'PUT',
             body: JSON.stringify({ connect: true })
+          },
+          headers,
+          data
+        )
+      }
+    },
+    {
+      name: 'disconnect',
+      action: <
+        T = {
+          connected: boolean
+        }
+      >() => {
+        const url = new URL('monitor/connect', base)
+
+        const data = JSON.stringify({ connect: false })
+
+        return dispatchRequest<T>(
+          url,
+          {
+            ...init,
+            method: 'PUT',
+            body: JSON.stringify({ connect: false })
           },
           headers,
           data
