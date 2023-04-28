@@ -40,5 +40,14 @@ export const monitorHandlers: Handler[] = [
         safe: true
       }
     })
+  },
+  {
+    method: 'PUT',
+    url: '/api/v1/monitor/init',
+    handler: eventHandler(_event => {
+      return {
+        connected: true
+      }
+    })
   }
 ]
