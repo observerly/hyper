@@ -6,27 +6,24 @@
 
 /*****************************************************************************************************************/
 
-import { baseHandlers } from './base'
+import { describe, expect, it, suite } from 'vitest'
 
-import { domeHandlers } from './dome'
-import { filterwheelHandlers } from './filterwheel'
-import { focuserHandlers } from './focuser'
-import { monitorHandlers } from './monitor'
-import { rotatorHandlers } from './rotator'
-import { telescopeHandlers } from './telescope'
-
-import { type Handler } from '../shared/handler'
+import { isDataResult } from '../src'
 
 /*****************************************************************************************************************/
 
-export const handlers: Handler[] = [
-  ...baseHandlers,
-  ...domeHandlers,
-  ...filterwheelHandlers,
-  ...focuserHandlers,
-  ...monitorHandlers,
-  ...rotatorHandlers,
-  ...telescopeHandlers
-]
+import { getURL, setupClient } from './setup'
 
 /*****************************************************************************************************************/
+
+suite('@observerly/hyper Fiber API Monitor Client', () => {
+  describe('monitorRoutes', () => {
+    it('should be able to determine the connection status of the monitor', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const isConnected = await client.monitor.isConnected()
+      expect(isDataResult(isConnected)).toBe(true)
+      if (!isDataResult(isConnected)) return
+      expect(isConnected).toStrictEqual({ connected: true })
+    })
+  })
+})

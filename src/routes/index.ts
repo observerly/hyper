@@ -9,6 +9,7 @@
 import { dome } from './dome'
 import { filterwheel } from './filterwheel'
 import { focuser } from './focuser'
+import { monitor } from './monitor'
 import { rotator } from './rotator'
 import { telescope } from './telescope'
 
@@ -22,6 +23,7 @@ export const routes = (
   dome: dome(base, init, headers),
   filterwheel: filterwheel(base, init, headers),
   focuser: focuser(base, init, headers),
+  monitor: monitor(base, init, headers),
   rotator: rotator(base, init, headers),
   telescope: telescope(base, init, headers)
 })
