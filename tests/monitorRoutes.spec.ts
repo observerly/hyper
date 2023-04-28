@@ -49,5 +49,13 @@ suite('@observerly/hyper Fiber API Monitor Client', () => {
       if (!isDataResult(initialise)) return
       expect(initialise).toStrictEqual({ connected: true })
     })
+
+    it('should be able to connect to the monitor', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const connect = await client.monitor.connect()
+      expect(isDataResult(connect)).toBe(true)
+      if (!isDataResult(connect)) return
+      expect(connect).toStrictEqual({ connected: true })
+    })
   })
 })
