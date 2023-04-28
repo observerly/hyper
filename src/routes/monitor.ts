@@ -26,5 +26,16 @@ export const monitor = (
         const url = new URL('monitor/connected', base)
         return dispatchRequest<T>(url, init, headers)
       }
+    },
+    {
+      name: 'isSafe',
+      action: <
+        T = {
+          safe: boolean
+        }
+      >() => {
+        const url = new URL('monitor/safe', base)
+        return dispatchRequest<T>(url, init, headers)
+      }
     }
   ] as const
