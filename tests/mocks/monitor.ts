@@ -30,5 +30,15 @@ export const monitorHandlers: Handler[] = [
         safe: true
       }
     })
+  },
+  {
+    method: 'GET',
+    url: '/api/v1/monitor/status',
+    handler: eventHandler(_event => {
+      return {
+        connected: true,
+        safe: true
+      }
+    })
   }
 ]

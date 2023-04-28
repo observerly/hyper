@@ -37,5 +37,17 @@ export const monitor = (
         const url = new URL('monitor/safe', base)
         return dispatchRequest<T>(url, init, headers)
       }
+    },
+    {
+      name: 'getStatus',
+      action: <
+        T = {
+          connected: boolean
+          safe: boolean
+        }
+      >() => {
+        const url = new URL('monitor/status', base)
+        return dispatchRequest<T>(url, init, headers)
+      }
     }
   ] as const
