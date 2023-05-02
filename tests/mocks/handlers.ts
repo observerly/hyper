@@ -16,11 +16,13 @@ import { rotatorHandlers } from './rotator'
 import { telescopeHandlers } from './telescope'
 
 import { type Handler } from '../shared/handler'
+import { conditionsHandlers } from './conditions'
 
 /*****************************************************************************************************************/
 
 export const handlers: Handler[] = [
   ...baseHandlers,
+  ...conditionsHandlers,
   ...domeHandlers,
   ...filterwheelHandlers,
   ...focuserHandlers,
