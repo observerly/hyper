@@ -26,5 +26,28 @@ export const conditions = (
         const url = new URL('conditions/connected', base)
         return dispatchRequest<T>(url, init, headers)
       }
+    },
+    {
+      name: 'getStatus',
+      action: <
+        T = {
+          cloudCover: number
+          dewPoint: number
+          humidity: number
+          pressure: number
+          rainRate: number
+          skyBrightness: number
+          skyQuality: number
+          skyTemperature: number
+          starFWHM: number
+          temperature: number
+          windDirection: number
+          windGust: number
+          windSpeed: number
+        }
+      >() => {
+        const url = new URL('conditions/status', base)
+        return dispatchRequest<T>(url, init, headers)
+      }
     }
   ] as const
