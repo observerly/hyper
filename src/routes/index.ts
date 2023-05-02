@@ -6,6 +6,7 @@
 
 /*****************************************************************************************************************/
 
+import { conditions } from './conditions'
 import { dome } from './dome'
 import { filterwheel } from './filterwheel'
 import { focuser } from './focuser'
@@ -20,6 +21,7 @@ export const routes = (
   init?: RequestInit,
   headers?: () => Headers | Promise<Headers>
 ) => ({
+  conditions: conditions(base, init, headers),
   dome: dome(base, init, headers),
   filterwheel: filterwheel(base, init, headers),
   focuser: focuser(base, init, headers),
