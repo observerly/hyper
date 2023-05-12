@@ -22,5 +22,27 @@ export const camera = (base: URL, init?: RequestInit, headers?: () => Promise<He
         const url = new URL('camera/connected', base)
         return dispatchRequest<T>(url, init, headers)
       }
+    },
+    {
+      name: 'getConfiguration',
+      action: <
+        T = {
+          asymmetricBin: boolean
+          binX: number
+          binY: number
+          ccdXSize: number
+          ccdYSize: number
+          fastReadOut: boolean
+          fullWellCapacity: number
+          gain: number
+          maxExposure: number
+          minExposure: number
+          pixelSizeX: number
+          pixelSizeY: number
+        }
+      >() => {
+        const url = new URL('camera/config', base)
+        return dispatchRequest<T>(url, init, headers)
+      }
     }
   ] as const
