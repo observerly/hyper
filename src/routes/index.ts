@@ -6,6 +6,7 @@
 
 /*****************************************************************************************************************/
 
+import { camera } from './camera'
 import { conditions } from './conditions'
 import { dome } from './dome'
 import { filterwheel } from './filterwheel'
@@ -21,6 +22,7 @@ export const routes = (
   init?: RequestInit,
   headers?: () => Headers | Promise<Headers>
 ) => ({
+  camera: camera(base, init, headers),
   conditions: conditions(base, init, headers),
   dome: dome(base, init, headers),
   filterwheel: filterwheel(base, init, headers),
