@@ -8,6 +8,7 @@
 
 import { baseHandlers } from './base'
 
+import { cameraHandlers } from './camera'
 import { domeHandlers } from './dome'
 import { filterwheelHandlers } from './filterwheel'
 import { focuserHandlers } from './focuser'
@@ -22,6 +23,7 @@ import { conditionsHandlers } from './conditions'
 
 export const handlers: Handler[] = [
   ...baseHandlers,
+  ...cameraHandlers,
   ...conditionsHandlers,
   ...domeHandlers,
   ...filterwheelHandlers,
