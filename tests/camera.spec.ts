@@ -25,5 +25,26 @@ suite('@observerly/hyper Fiber API Observing Camera Client', () => {
       if (!isDataResult(isConnected)) return
       expect(isConnected).toStrictEqual({ connected: true })
     })
+
+    it('should be able to get the configuration of the camera', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const configuration = await client.camera.getConfiguration()
+      expect(isDataResult(configuration)).toBe(true)
+      if (!isDataResult(configuration)) return
+      expect(configuration).toStrictEqual({
+        asymmetricBin: false,
+        binX: 1,
+        binY: 1,
+        ccdXSize: 0,
+        ccdYSize: 0,
+        fastReadOut: false,
+        fullWellCapacity: 0,
+        gain: 0,
+        maxExposure: 0,
+        minExposure: 0,
+        pixelSizeX: 0,
+        pixelSizeY: 0
+      })
+    })
   })
 })

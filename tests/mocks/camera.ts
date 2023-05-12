@@ -21,5 +21,25 @@ export const cameraHandlers: Handler[] = [
         connected: true
       }
     })
+  },
+  {
+    method: 'GET',
+    url: '/api/v1/camera/config',
+    handler: eventHandler(_event => {
+      return {
+        asymmetricBin: false,
+        binX: 1,
+        binY: 1,
+        ccdXSize: 0,
+        ccdYSize: 0,
+        fastReadOut: false,
+        fullWellCapacity: 0,
+        gain: 0,
+        maxExposure: 0,
+        minExposure: 0,
+        pixelSizeX: 0,
+        pixelSizeY: 0
+      }
+    })
   }
 ]
