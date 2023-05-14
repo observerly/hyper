@@ -57,5 +57,16 @@ export const camera = (base: URL, init?: RequestInit, headers?: () => Promise<He
         const url = new URL('camera/ready', base)
         return dispatchRequest<T>(url, init, headers)
       }
+    },
+    {
+      name: 'getFastReadOutMode',
+      action: <
+        T = {
+          fastReadoutMode: boolean
+        }
+      >() => {
+        const url = new URL('camera/fastreadout', base)
+        return dispatchRequest<T>(url, init, headers)
+      }
     }
   ] as const

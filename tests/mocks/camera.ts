@@ -52,5 +52,14 @@ export const cameraHandlers: Handler[] = [
         ready: true
       }
     })
+  },
+  {
+    method: 'GET',
+    url: '/api/v1/camera/fastreadout',
+    handler: eventHandler(_event => {
+      return {
+        fastReadOut: false
+      }
+    })
   }
 ]

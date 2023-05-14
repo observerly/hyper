@@ -58,5 +58,15 @@ suite('@observerly/hyper Fiber API Observing Camera Client', () => {
         ready: true
       })
     })
+
+    it('should be able to determine if the camera is fast readout capable', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const isFastReadOut = await client.camera.getFastReadOutMode()
+      expect(isDataResult(isFastReadOut)).toBe(true)
+      if (!isDataResult(isFastReadOut)) return
+      expect(isFastReadOut).toStrictEqual({
+        fastReadOut: false
+      })
+    })
   })
 })
