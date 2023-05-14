@@ -30,6 +30,7 @@ export default defineConfig({
       fileName: format => `hyper.${format}.js`
     },
     rollupOptions: {
+      external: ['./playground/*.ts'],
       output: {
         sourcemap: true
       }
