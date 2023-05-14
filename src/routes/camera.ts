@@ -44,5 +44,18 @@ export const camera = (base: URL, init?: RequestInit, headers?: () => Promise<He
         const url = new URL('camera/config', base)
         return dispatchRequest<T>(url, init, headers)
       }
+    },
+    {
+      name: 'isReady',
+      action: <
+        T = {
+          complete: boolean
+          progress: number
+          ready: boolean
+        }
+      >() => {
+        const url = new URL('camera/ready', base)
+        return dispatchRequest<T>(url, init, headers)
+      }
     }
   ] as const

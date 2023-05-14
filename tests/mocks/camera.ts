@@ -41,5 +41,16 @@ export const cameraHandlers: Handler[] = [
         pixelSizeY: 0
       }
     })
+  },
+  {
+    method: 'GET',
+    url: '/api/v1/camera/ready',
+    handler: eventHandler(_event => {
+      return {
+        complete: true,
+        progress: 100,
+        ready: true
+      }
+    })
   }
 ]

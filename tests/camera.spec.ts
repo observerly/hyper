@@ -46,5 +46,17 @@ suite('@observerly/hyper Fiber API Observing Camera Client', () => {
         pixelSizeY: 0
       })
     })
+
+    it('should be able to determine if the camera is ready', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const isReady = await client.camera.isReady()
+      expect(isDataResult(isReady)).toBe(true)
+      if (!isDataResult(isReady)) return
+      expect(isReady).toStrictEqual({
+        complete: true,
+        progress: 100,
+        ready: true
+      })
+    })
   })
 })
