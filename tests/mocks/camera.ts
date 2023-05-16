@@ -44,6 +44,21 @@ export const cameraHandlers: Handler[] = [
   },
   {
     method: 'GET',
+    url: '/api/v1/camera/status',
+    handler: eventHandler(_event => {
+      return {
+        connected: true,
+        pulseGuiding: false,
+        coolerOn: false,
+        coolerPower: 0,
+        CCDtemperature: 0,
+        heatSinkTemperature: 0,
+        state: 'idle'
+      }
+    })
+  },
+  {
+    method: 'GET',
     url: '/api/v1/camera/ready',
     handler: eventHandler(_event => {
       return {
