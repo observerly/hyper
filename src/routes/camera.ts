@@ -85,5 +85,16 @@ export const camera = (base: URL, init?: RequestInit, headers?: () => Promise<He
         const url = new URL('camera/fastreadout', base)
         return dispatchRequest<T>(url, init, headers)
       }
+    },
+    {
+      name: 'initialise',
+      action: <
+        T = {
+          connected: boolean
+        }
+      >() => {
+        const url = new URL('camera/init', base)
+        return dispatchRequest<T>(url, { ...init, method: 'PUT' }, headers)
+      }
     }
   ] as const
