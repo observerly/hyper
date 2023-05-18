@@ -76,5 +76,14 @@ export const cameraHandlers: Handler[] = [
         fastReadOut: false
       }
     })
+  },
+  {
+    method: 'PUT',
+    url: '/api/v1/camera/init',
+    handler: eventHandler(_event => {
+      return {
+        connected: true
+      }
+    })
   }
 ]

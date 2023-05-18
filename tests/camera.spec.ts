@@ -84,5 +84,13 @@ suite('@observerly/hyper Fiber API Observing Camera Client', () => {
         fastReadOut: false
       })
     })
+
+    it('should be able to initialize the camera', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const init = await client.camera.initialise()
+      expect(isDataResult(init)).toBe(true)
+      if (!isDataResult(init)) return
+      expect(init).toStrictEqual({ connected: true })
+    })
   })
 })
