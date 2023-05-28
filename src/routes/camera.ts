@@ -79,7 +79,7 @@ export const camera = (base: URL, init?: RequestInit, headers?: () => Promise<He
       name: 'getFastReadOutMode',
       action: <
         T = {
-          fastReadoutMode: boolean
+          fastReadOut: boolean
         }
       >() => {
         const url = new URL('camera/fastreadout', base)
