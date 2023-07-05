@@ -25,9 +25,11 @@ export default defineConfig({
   build: {
     outDir: './dist',
     lib: {
+      // Could also be a dictionary or array of multiple entry points
       entry: resolve(__dirname, 'src/index.ts'),
       name: '@observerly/hyper',
-      fileName: format => `hyper.${format}.js`
+      // the proper extensions will be added
+      fileName: 'hyper'
     },
     rollupOptions: {
       external: ['./playground/*.ts'],

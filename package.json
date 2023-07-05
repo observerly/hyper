@@ -12,17 +12,23 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/observerly"
   },
+  "type": "module",
   "files": [
     "dist"
   ],
-  "main": "./dist/hyper.umd.js",
-  "module": "./dist/hyper.es.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/hyper.umd.cjs",
+  "module": "./dist/hyper.js",
   "exports": {
     ".": {
-      "import": "./dist/hyper.es.js",
-      "require": "./dist/hyper.umd.js"
+      "import": "./dist/hyper.js",
+      "require": "./dist/hyper.umd.cjs"
     }
+  },
+  "types": "./dist/index.d.ts",
+  "release": {
+    "branches": [
+      "main"
+    ]
   },
   "scripts": {
     "dev": "vite",
