@@ -1,7 +1,7 @@
 {
   "name": "@observerly/hyper",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Hyper is observerly's Typescript + Vite client for interoperating with the Fiber ASCOM Alpaca API",
   "repository": {
     "type": "git",
