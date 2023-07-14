@@ -99,6 +99,31 @@ export const telescopeHandlers: Handler[] = [
   },
   {
     method: 'PUT',
+    url: '/api/v1/telescope/shutdown',
+    handler: eventHandler(event => {
+      const method = getMethod(event)
+
+      if (method !== 'PUT') {
+        return new Response('Method Not Allowed', {
+          status: 405,
+          statusText: 'Method Not Allowed'
+        })
+      }
+
+      const utc = new Date('2021-05-14T00:00:00.000+00:00').toISOString()
+
+      return {
+        connected: false,
+        slewing: false,
+        tracking: false,
+        parked: true,
+        home: false,
+        utc
+      }
+    })
+  },
+  {
+    method: 'PUT',
     url: '/api/v1/telescope/connect',
     handler: eventHandler(async event => {
       const method = getMethod(event)
