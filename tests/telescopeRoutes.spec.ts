@@ -79,6 +79,23 @@ suite('@observerly/hyper Fiber API Telescope Client', () => {
       expect(init).toStrictEqual({ connected: true })
     })
 
+    it('should be able to shutdown the telescope', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const shutdown = await client.telescope.shutdown()
+      expect(isDataResult(shutdown)).toBe(true)
+      if (!isDataResult(shutdown)) return
+      // Create a UTC now string:
+      const utc = new Date('2021-05-14T00:00:00.000+00:00').toISOString()
+      expect(shutdown).toStrictEqual({
+        connected: false,
+        slewing: false,
+        tracking: false,
+        parked: true,
+        home: false,
+        utc
+      })
+    })
+
     it('should be able to connect to the telescope', async () => {
       const client = setupClient(getURL('/api/v1/'))
       const connect = await client.telescope.connect()

@@ -104,6 +104,23 @@ export const telescope = (
       }
     },
     {
+      name: 'shutdown',
+      action: <
+        T = {
+          connected: boolean
+          slewing: boolean
+          tracking: boolean
+          parked: boolean
+          home: boolean
+          utc: string
+        }
+      >() => {
+        const url = new URL('telescope/shutdown', base)
+
+        return dispatchRequest<T>(url, { ...init, method: 'PUT' }, headers)
+      }
+    },
+    {
       name: 'connect',
       action: <
         T = {
