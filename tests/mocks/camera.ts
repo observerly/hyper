@@ -85,5 +85,20 @@ export const cameraHandlers: Handler[] = [
         connected: true
       }
     })
+  },
+  {
+    method: 'PUT',
+    url: '/api/v1/camera/cooler',
+    handler: eventHandler(_event => {
+      return {
+        connected: true,
+        pulseGuiding: false,
+        coolerOn: true,
+        coolerPower: 0,
+        CCDtemperature: 0,
+        heatSinkTemperature: 0,
+        state: 'idle'
+      }
+    })
   }
 ]

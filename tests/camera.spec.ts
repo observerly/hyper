@@ -85,6 +85,22 @@ suite('@observerly/hyper Fiber API Observing Camera Client', () => {
       })
     })
 
+    it("should be able to turn the camera's cooler on", async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const status = await client.camera.turnCoolerOn()
+      expect(isDataResult(status)).toBe(true)
+      if (!isDataResult(status)) return
+      expect(status).toStrictEqual({
+        connected: true,
+        pulseGuiding: false,
+        coolerOn: true,
+        coolerPower: 0,
+        CCDtemperature: 0,
+        heatSinkTemperature: 0,
+        state: 'idle'
+      })
+    })
+
     it('should be able to initialize the camera', async () => {
       const client = setupClient(getURL('/api/v1/'))
       const init = await client.camera.initialise()
