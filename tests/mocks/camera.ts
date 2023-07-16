@@ -6,7 +6,7 @@
 
 /*****************************************************************************************************************/
 
-import { eventHandler, getMethod } from 'h3'
+import { eventHandler, getMethod, readBody } from 'h3'
 
 import { type Handler } from '../shared/handler'
 
@@ -115,6 +115,39 @@ export const cameraHandlers: Handler[] = [
       }
 
       return status
+    })
+  },
+  {
+    method: ['PUT'],
+    url: '/api/v1/camera/temperature',
+    handler: eventHandler(async event => {
+      const method = getMethod(event)
+
+      if (method !== 'PUT') {
+        return new Response('Method Not Allowed', {
+          status: 405,
+          statusText: 'Method Not Allowed'
+        })
+      }
+
+      const body = await readBody<{ temperature: number }>(event)
+
+      if (!body) {
+        return new Response('Bad Request', {
+          status: 400,
+          statusText: 'Bad Request'
+        })
+      }
+
+      return {
+        connected: true,
+        pulseGuiding: false,
+        coolerOn: false,
+        coolerPower: 0,
+        CCDtemperature: body.temperature,
+        heatSinkTemperature: 0,
+        state: 'idle'
+      }
     })
   }
 ]

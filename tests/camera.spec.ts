@@ -124,5 +124,21 @@ suite('@observerly/hyper Fiber API Observing Camera Client', () => {
       if (!isDataResult(init)) return
       expect(init).toStrictEqual({ connected: true })
     })
+
+    it('should be able to set the camera CCD temperature', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const status = await client.camera.setCCDTemperature({ temperature: -10 })
+      expect(isDataResult(status)).toBe(true)
+      if (!isDataResult(status)) return
+      expect(status).toStrictEqual({
+        connected: true,
+        pulseGuiding: false,
+        coolerOn: false,
+        coolerPower: 0,
+        CCDtemperature: -10,
+        heatSinkTemperature: 0,
+        state: 'idle'
+      })
+    })
   })
 })
