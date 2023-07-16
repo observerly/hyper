@@ -6,7 +6,7 @@
 
 /*****************************************************************************************************************/
 
-import { eventHandler } from 'h3'
+import { eventHandler, getMethod } from 'h3'
 
 import { type Handler } from '../shared/handler'
 
@@ -87,18 +87,34 @@ export const cameraHandlers: Handler[] = [
     })
   },
   {
-    method: 'PUT',
+    method: ['PUT', 'DELETE'],
     url: '/api/v1/camera/cooler',
-    handler: eventHandler(_event => {
-      return {
+    handler: eventHandler(event => {
+      const method = getMethod(event)
+
+      if (!['PUT', 'DELETE'].includes(method)) {
+        return new Response('Method Not Allowed', {
+          status: 405,
+          statusText: 'Method Not Allowed'
+        })
+      }
+
+      const status = {
         connected: true,
         pulseGuiding: false,
-        coolerOn: true,
+        coolerOn: false,
         coolerPower: 0,
         CCDtemperature: 0,
         heatSinkTemperature: 0,
         state: 'idle'
       }
+
+      if (method === 'PUT') {
+        status.coolerOn = true
+        return status
+      }
+
+      return status
     })
   }
 ]
