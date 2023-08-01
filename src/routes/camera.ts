@@ -37,6 +37,24 @@ export const camera = (base: URL, init?: RequestInit, headers?: () => Promise<He
       }
     },
     {
+      name: 'shutdown',
+      action: <
+        T = {
+          connected: boolean
+          pulseGuiding: boolean
+          coolerOn: boolean
+          coolerPower: number
+          CCDtemperature: number
+          heatSinkTemperature: number
+          state: string
+        }
+      >() => {
+        const url = new URL('camera/shutdown', base)
+
+        return dispatchRequest<T>(url, { ...init, method: 'PUT' }, headers)
+      }
+    },
+    {
       name: 'getConfiguration',
       action: <
         T = {

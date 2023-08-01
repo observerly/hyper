@@ -140,5 +140,21 @@ suite('@observerly/hyper Fiber API Observing Camera Client', () => {
         state: 'idle'
       })
     })
+
+    it('should be able to shutdown the camera', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const status = await client.camera.shutdown()
+      expect(isDataResult(status)).toBe(true)
+      if (!isDataResult(status)) return
+      expect(status).toStrictEqual({
+        connected: false,
+        pulseGuiding: false,
+        coolerOn: false,
+        coolerPower: 0,
+        CCDtemperature: 0,
+        heatSinkTemperature: 0,
+        state: 'idle'
+      })
+    })
   })
 })

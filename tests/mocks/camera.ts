@@ -23,6 +23,30 @@ export const cameraHandlers: Handler[] = [
     })
   },
   {
+    method: 'PUT',
+    url: '/api/v1/camera/shutdown',
+    handler: eventHandler(event => {
+      const method = getMethod(event)
+
+      if (method !== 'PUT') {
+        return new Response('Method Not Allowed', {
+          status: 405,
+          statusText: 'Method Not Allowed'
+        })
+      }
+
+      return {
+        connected: false,
+        pulseGuiding: false,
+        coolerOn: false,
+        coolerPower: 0,
+        CCDtemperature: 0,
+        heatSinkTemperature: 0,
+        state: 'idle'
+      }
+    })
+  },
+  {
     method: 'GET',
     url: '/api/v1/camera/config',
     handler: eventHandler(_event => {
