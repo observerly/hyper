@@ -74,6 +74,23 @@ export const dome = (base: URL, init?: RequestInit, headers?: () => Promise<Head
       }
     },
     {
+      name: 'shutdown',
+      action: <
+        T = {
+          connected: boolean
+          slewing: boolean
+          slaved: boolean
+          parked: boolean
+          home: boolean
+          shutter: string
+        }
+      >() => {
+        const url = new URL('dome/shutdown', base)
+
+        return dispatchRequest<T>(url, { ...init, method: 'PUT' }, headers)
+      }
+    },
+    {
       name: 'connect',
       action: <
         T = {
