@@ -144,5 +144,28 @@ export const domeHandlers: Handler[] = [
         coupled: body.couple
       }
     })
+  },
+  {
+    method: 'PUT',
+    url: '/api/v1/dome/shutdown',
+    handler: eventHandler(async event => {
+      const method = getMethod(event)
+
+      if (method !== 'PUT') {
+        return new Response('Method Not Allowed', {
+          status: 405,
+          statusText: 'Method Not Allowed'
+        })
+      }
+
+      return {
+        connected: false,
+        slewing: false,
+        slaved: false,
+        parked: true,
+        home: true,
+        shutter: 'Closed'
+      }
+    })
   }
 ]

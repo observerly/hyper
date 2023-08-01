@@ -112,5 +112,20 @@ suite('@observerly/hyper Fiber API Dome Client', () => {
       if (!isDataResult(uncouple)) return
       expect(uncouple).toStrictEqual({ coupled: false })
     })
+
+    it('should be able to shutdown the dome', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const shutdown = await client.dome.shutdown()
+      expect(isDataResult(shutdown)).toBe(true)
+      if (!isDataResult(shutdown)) return
+      expect(shutdown).toStrictEqual({
+        connected: false,
+        slewing: false,
+        slaved: false,
+        parked: true,
+        home: true,
+        shutter: 'Closed'
+      })
+    })
   })
 })
