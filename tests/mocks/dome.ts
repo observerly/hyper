@@ -58,7 +58,16 @@ export const domeHandlers: Handler[] = [
   {
     method: 'PUT',
     url: '/api/v1/dome/init',
-    handler: eventHandler(_event => {
+    handler: eventHandler(event => {
+      const method = getMethod(event)
+
+      if (method !== 'PUT') {
+        return new Response('Method Not Allowed', {
+          status: 405,
+          statusText: 'Method Not Allowed'
+        })
+      }
+
       return {
         connected: true
       }
