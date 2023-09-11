@@ -70,7 +70,7 @@ export const dome = (base: URL, init?: RequestInit, headers?: () => Promise<Head
         }
       >() => {
         const url = new URL('dome/init', base)
-        return dispatchRequest<T>(url, init, headers)
+        return dispatchRequest<T>(url, { ...init, method: 'PUT' }, headers)
       }
     },
     {
