@@ -173,5 +173,40 @@ export const cameraHandlers: Handler[] = [
         state: 'idle'
       }
     })
+  },
+  {
+    method: ['PUT'],
+    url: '/api/v1/camera/exposure',
+    handler: eventHandler(async event => {
+      const method = getMethod(event)
+
+      if (method !== 'PUT') {
+        return new Response('Method Not Allowed', {
+          status: 405,
+          statusText: 'Method Not Allowed'
+        })
+      }
+
+      const body = await readBody<{
+        duration: number
+        flat: boolean
+        dark: boolean
+        light: boolean
+      }>(event)
+
+      if (!body) {
+        return new Response('Bad Request', {
+          status: 400,
+          statusText: 'Bad Request'
+        })
+      }
+
+      return {
+        duration: 300,
+        flat: false,
+        dark: false,
+        light: true
+      }
+    })
   }
 ]
