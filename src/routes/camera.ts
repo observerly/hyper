@@ -178,7 +178,14 @@ export const camera = (base: URL, init?: RequestInit, headers?: () => Promise<He
     },
     {
       name: 'startExposure',
-      action: <T = {}>(body: {
+      action: <
+        T = {
+          duration: number
+          flat: boolean
+          dark: boolean
+          light: boolean
+        }
+      >(body: {
         duration: number
         flat: boolean
         dark: boolean
