@@ -175,5 +175,25 @@ export const camera = (base: URL, init?: RequestInit, headers?: () => Promise<He
           data
         )
       }
+    },
+    {
+      name: 'startExposure',
+      action: <T = {}>(body: {
+        duration: number
+        flat: boolean
+        dark: boolean
+        light: boolean
+      }) => {
+        const url = new URL('camera/exposure', base)
+
+        const data = JSON.stringify(body)
+
+        return dispatchRequest<T>(
+          url,
+          { ...init, method: 'PUT', body: JSON.stringify(body) },
+          headers,
+          data
+        )
+      }
     }
   ] as const
