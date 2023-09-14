@@ -174,5 +174,13 @@ suite('@observerly/hyper Fiber API Observing Camera Client', () => {
         light: true
       })
     })
+
+    it('should be able to stop an exposure on the camera', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const status = await client.camera.stopExposure()
+      expect(isDataResult(status)).toBe(true)
+      if (!isDataResult(status)) return
+      expect(status).toStrictEqual({})
+    })
   })
 })

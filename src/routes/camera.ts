@@ -202,5 +202,13 @@ export const camera = (base: URL, init?: RequestInit, headers?: () => Promise<He
           data
         )
       }
+    },
+    {
+      name: 'stopExposure',
+      action: <T = {}>() => {
+        const url = new URL('camera/exposure', base)
+
+        return dispatchRequest<T>(url, { ...init, method: 'DELETE' }, headers)
+      }
     }
   ] as const
