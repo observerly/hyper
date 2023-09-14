@@ -175,12 +175,12 @@ export const cameraHandlers: Handler[] = [
     })
   },
   {
-    method: ['PUT'],
+    method: ['PUT', 'DELETE'],
     url: '/api/v1/camera/exposure',
     handler: eventHandler(async event => {
       const method = getMethod(event)
 
-      if (method !== 'PUT') {
+      if (method !== 'PUT' && method !== 'DELETE') {
         return new Response('Method Not Allowed', {
           status: 405,
           statusText: 'Method Not Allowed'
@@ -201,12 +201,14 @@ export const cameraHandlers: Handler[] = [
         })
       }
 
-      return {
-        duration: 300,
-        flat: false,
-        dark: false,
-        light: true
-      }
+      return method === 'PUT'
+        ? {
+            duration: 300,
+            flat: false,
+            dark: false,
+            light: true
+          }
+        : {}
     })
   }
 ]
