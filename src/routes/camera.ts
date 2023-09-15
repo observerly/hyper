@@ -10,6 +10,28 @@ import { dispatchRequest } from '../internals/dispatchRequest'
 
 /*****************************************************************************************************************/
 
+export type CameraExposureStorePayload = {
+  bucketName: string
+  userId: string
+  uuid: string
+  duration: number
+  start: string
+  filter: string
+  isDark: boolean
+  isFlat: boolean
+  mimetype: string
+  target: string
+  mjd: number
+  equinox: number
+  ra: number
+  dec: number
+  telescope: string
+  instrument: string
+  observer: string
+}
+
+/*****************************************************************************************************************/
+
 export const camera = (base: URL, init?: RequestInit, headers?: () => Promise<Headers> | Headers) =>
   [
     {
@@ -209,6 +231,36 @@ export const camera = (base: URL, init?: RequestInit, headers?: () => Promise<He
         const url = new URL('camera/exposure', base)
 
         return dispatchRequest<T>(url, { ...init, method: 'DELETE' }, headers)
+      }
+    },
+    {
+      name: 'storeExposure',
+      action: <
+        T = {
+          ccdXSize: number
+          ccdYSize: number
+          isDark: boolean
+          isFlat: boolean
+          locations: string[]
+          maxADU: number
+          mimetype: string
+          sensor: string
+          userId: string
+          uuid: string
+        }
+      >(
+        body: CameraExposureStorePayload
+      ) => {
+        const url = new URL('camera/store', base)
+
+        const data = JSON.stringify(body)
+
+        return dispatchRequest<T>(
+          url,
+          { ...init, method: 'POST', body: JSON.stringify(body) },
+          headers,
+          data
+        )
       }
     }
   ] as const

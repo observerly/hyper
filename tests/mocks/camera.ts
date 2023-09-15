@@ -10,6 +10,8 @@ import { eventHandler, getMethod, readBody } from 'h3'
 
 import { type Handler } from '../shared/handler'
 
+import { type CameraExposureStorePayload } from '../../src/routes/camera'
+
 /*****************************************************************************************************************/
 
 export const cameraHandlers: Handler[] = [
@@ -209,6 +211,44 @@ export const cameraHandlers: Handler[] = [
             light: true
           }
         : {}
+    })
+  },
+  {
+    method: ['POST'],
+    url: '/api/v1/camera/store',
+    handler: eventHandler(async event => {
+      const method = getMethod(event)
+
+      if (method !== 'POST') {
+        return new Response('Method Not Allowed', {
+          status: 405,
+          statusText: 'Method Not Allowed'
+        })
+      }
+
+      const body = await readBody<CameraExposureStorePayload>(event)
+
+      if (!body) {
+        return new Response('Bad Request', {
+          status: 400,
+          statusText: 'Bad Request'
+        })
+      }
+
+      return {
+        ccdXSize: 1463,
+        ccdYSize: 1168,
+        isDark: body.isDark,
+        isFlat: body.isFlat,
+        locations: [
+          `gs://${body.bucketName}/${body.userId}/${body.uuid}/${body.target}_[${body.filter}]_monochrome_M_${body.duration}s_2021-05-15T03:00:00.000Z.fits`
+        ],
+        maxADU: 65535,
+        mimetype: body.mimetype,
+        sensor: 'Monochrome',
+        userId: body.userId,
+        uuid: body.uuid
+      }
     })
   }
 ]
