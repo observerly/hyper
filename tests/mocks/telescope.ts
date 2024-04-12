@@ -98,12 +98,12 @@ export const telescopeHandlers: Handler[] = [
     })
   },
   {
-    method: 'PUT',
+    method: 'DELETE',
     url: '/api/v1/telescope/shutdown',
     handler: eventHandler(event => {
       const method = getMethod(event)
 
-      if (method !== 'PUT') {
+      if (method !== 'DELETE') {
         return new Response('Method Not Allowed', {
           status: 405,
           statusText: 'Method Not Allowed'
