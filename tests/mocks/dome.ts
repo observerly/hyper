@@ -155,12 +155,12 @@ export const domeHandlers: Handler[] = [
     })
   },
   {
-    method: 'PUT',
+    method: 'DELETE',
     url: '/api/v1/dome/shutdown',
     handler: eventHandler(async event => {
       const method = getMethod(event)
 
-      if (method !== 'PUT') {
+      if (method !== 'DELETE') {
         return new Response('Method Not Allowed', {
           status: 405,
           statusText: 'Method Not Allowed'
