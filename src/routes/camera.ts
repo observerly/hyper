@@ -161,6 +161,29 @@ export const camera = (base: URL, init?: RequestInit, headers?: () => Promise<He
       }
     },
     {
+      name: 'disconnect',
+      action: <
+        T = {
+          connected: boolean
+        }
+      >() => {
+        const url = new URL('camera/connect', base)
+
+        const data = JSON.stringify({ connect: false })
+
+        return dispatchRequest<T>(
+          url,
+          {
+            ...init,
+            method: 'PUT',
+            body: JSON.stringify({ connect: false })
+          },
+          headers,
+          data
+        )
+      }
+    },
+    {
       name: 'turnCoolerOn',
       action: <
         T = {
