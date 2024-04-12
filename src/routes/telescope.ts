@@ -117,7 +117,7 @@ export const telescope = (
       >() => {
         const url = new URL('telescope/shutdown', base)
 
-        return dispatchRequest<T>(url, { ...init, method: 'PUT' }, headers)
+        return dispatchRequest<T>(url, { ...init, method: 'DELETE' }, headers)
       }
     },
     {
