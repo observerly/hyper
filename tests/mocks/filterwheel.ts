@@ -44,6 +44,7 @@ export const filterwheelHandlers: Handler[] = [
       }
 
       return {
+        name: 'R',
         position: 0
       }
     })
