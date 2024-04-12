@@ -31,6 +31,7 @@ export const filterwheel = (
       name: 'getPosition',
       action: <
         T = {
+          name: string
           position: number
         }
       >() => {
@@ -138,7 +139,7 @@ export const filterwheel = (
           position: number
         }
       >(body: {
-        filter: string
+        name: string
       }) => {
         const url = new URL('filterwheel/name', base)
 
