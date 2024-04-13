@@ -47,6 +47,14 @@ suite('@observerly/hyper NOX API Observing Exposure Client', () => {
         light: true
       })
     })
+
+    it('should be able to stop an exposure', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const status = await client.exposure.stop()
+      expect(isDataResult(status)).toBe(true)
+      if (!isDataResult(status)) return
+      expect(status).toStrictEqual({})
+    })
   })
 })
 
