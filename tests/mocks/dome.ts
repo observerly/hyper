@@ -140,7 +140,7 @@ export const domeHandlers: Handler[] = [
         })
       }
 
-      const body = await readBody<{ couple: boolean }>(event)
+      const body = await readBody<{ couple: boolean; uncouple: boolean }>(event)
 
       if (!body) {
         return new Response('Bad Request', {
@@ -150,7 +150,8 @@ export const domeHandlers: Handler[] = [
       }
 
       return {
-        coupled: body.couple
+        coupled: body.couple,
+        uncouple: body.uncouple
       }
     })
   },

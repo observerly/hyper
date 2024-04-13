@@ -191,14 +191,14 @@ export const dome = (base: URL, init?: RequestInit, headers?: () => Promise<Head
       >() => {
         const url = new URL('dome/couple', base)
 
-        const data = JSON.stringify({ couple: true })
+        const data = JSON.stringify({ couple: true, uncouple: false })
 
         return dispatchRequest<T>(
           url,
           {
             ...init,
             method: 'PUT',
-            body: JSON.stringify({ couple: true })
+            body: JSON.stringify({ couple: true, uncouple: false })
           },
           headers,
           data
@@ -214,14 +214,14 @@ export const dome = (base: URL, init?: RequestInit, headers?: () => Promise<Head
       >() => {
         const url = new URL('dome/couple', base)
 
-        const data = JSON.stringify({ couple: false })
+        const data = JSON.stringify({ couple: false, uncouple: true })
 
         return dispatchRequest<T>(
           url,
           {
             ...init,
             method: 'PUT',
-            body: JSON.stringify({ couple: false })
+            body: JSON.stringify({ couple: false, uncouple: true })
           },
           headers,
           data
@@ -229,3 +229,5 @@ export const dome = (base: URL, init?: RequestInit, headers?: () => Promise<Head
       }
     }
   ] as const
+
+/*****************************************************************************************************************/
