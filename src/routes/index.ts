@@ -9,6 +9,7 @@
 import { camera } from './camera'
 import { conditions } from './conditions'
 import { dome } from './dome'
+import { exposure } from './exposure'
 import { filterwheel } from './filterwheel'
 import { focuser } from './focuser'
 import { monitor } from './monitor'
@@ -25,6 +26,7 @@ export const routes = (
   camera: camera(base, init, headers),
   conditions: conditions(base, init, headers),
   dome: dome(base, init, headers),
+  exposure: exposure(base, init, headers),
   filterwheel: filterwheel(base, init, headers),
   focuser: focuser(base, init, headers),
   monitor: monitor(base, init, headers),
