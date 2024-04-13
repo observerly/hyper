@@ -55,6 +55,14 @@ export const exposure = (
           data
         )
       }
+    },
+    {
+      name: 'stop',
+      action: <T = {}>() => {
+        const url = new URL('exposure/stop', base)
+
+        return dispatchRequest<T>(url, { ...init, method: 'DELETE' }, headers)
+      }
     }
   ] as const
 

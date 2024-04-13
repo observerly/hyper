@@ -58,6 +58,22 @@ export const exposureHandlers: Handler[] = [
         light: body.light
       }
     })
+  },
+  {
+    method: ['DELETE'],
+    url: '/api/v1/exposure/stop',
+    handler: eventHandler(async event => {
+      const method = getMethod(event)
+
+      if (method !== 'DELETE') {
+        return new Response('Method Not Allowed', {
+          status: 405,
+          statusText: 'Method Not Allowed'
+        })
+      }
+
+      return {}
+    })
   }
 ]
 
