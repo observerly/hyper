@@ -73,7 +73,7 @@ export const camera = (base: URL, init?: RequestInit, headers?: () => Promise<He
       >() => {
         const url = new URL('camera/shutdown', base)
 
-        return dispatchRequest<T>(url, { ...init, method: 'PUT' }, headers)
+        return dispatchRequest<T>(url, { ...init, method: 'DELETE' }, headers)
       }
     },
     {
