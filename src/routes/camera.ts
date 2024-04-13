@@ -197,7 +197,15 @@ export const camera = (base: URL, init?: RequestInit, headers?: () => Promise<He
         }
       >() => {
         const url = new URL('camera/cooler', base)
-        return dispatchRequest<T>(url, { ...init, method: 'PUT' }, headers)
+
+        const data = JSON.stringify({ on: true })
+
+        return dispatchRequest<T>(
+          url,
+          { ...init, method: 'PUT', body: JSON.stringify({ on: true }) },
+          headers,
+          data
+        )
       }
     },
     {
@@ -214,7 +222,15 @@ export const camera = (base: URL, init?: RequestInit, headers?: () => Promise<He
         }
       >() => {
         const url = new URL('camera/cooler', base)
-        return dispatchRequest<T>(url, { ...init, method: 'DELETE' }, headers)
+
+        const data = JSON.stringify({ on: false })
+
+        return dispatchRequest<T>(
+          url,
+          { ...init, method: 'PUT', body: JSON.stringify({ on: false }) },
+          headers,
+          data
+        )
       }
     },
     {

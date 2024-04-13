@@ -140,31 +140,28 @@ export const cameraHandlers: Handler[] = [
     })
   },
   {
-    method: ['PUT', 'DELETE'],
+    method: ['PUT'],
     url: '/api/v1/camera/cooler',
-    handler: eventHandler(event => {
+    handler: eventHandler(async event => {
       const method = getMethod(event)
 
-      if (!['PUT', 'DELETE'].includes(method)) {
+      if (!['PUT'].includes(method)) {
         return new Response('Method Not Allowed', {
           status: 405,
           statusText: 'Method Not Allowed'
         })
       }
 
+      const body = await readBody<{ on: boolean }>(event)
+
       const status = {
         connected: true,
         pulseGuiding: false,
-        coolerOn: false,
+        coolerOn: body.on,
         coolerPower: 0,
         CCDtemperature: 0,
         heatSinkTemperature: 0,
         state: 'idle'
-      }
-
-      if (method === 'PUT') {
-        status.coolerOn = true
-        return status
       }
 
       return status
