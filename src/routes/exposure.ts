@@ -28,6 +28,33 @@ export const exposure = (
         const url = new URL('exposure/ready', base)
         return dispatchRequest<T>(url, init, headers)
       }
+    },
+    {
+      name: 'start',
+      action: <
+        T = {
+          duration: number
+          flat: boolean
+          dark: boolean
+          light: boolean
+        }
+      >(body: {
+        duration: number
+        flat: boolean
+        dark: boolean
+        light: boolean
+      }) => {
+        const url = new URL('exposure/start', base)
+
+        const data = JSON.stringify(body)
+
+        return dispatchRequest<T>(
+          url,
+          { ...init, method: 'PUT', body: JSON.stringify(body) },
+          headers,
+          data
+        )
+      }
     }
   ] as const
 

@@ -29,6 +29,24 @@ suite('@observerly/hyper NOX API Observing Exposure Client', () => {
         ready: true
       })
     })
+
+    it('should be able to start an exposure', async () => {
+      const client = setupClient(getURL('/api/v1/'))
+      const status = await client.exposure.start({
+        duration: 300,
+        dark: false,
+        flat: false,
+        light: true
+      })
+      expect(isDataResult(status)).toBe(true)
+      if (!isDataResult(status)) return
+      expect(status).toStrictEqual({
+        duration: 300,
+        dark: false,
+        flat: false,
+        light: true
+      })
+    })
   })
 })
 
